@@ -1,16 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { GridProductosComponent } from './componentes/productos/componentes/grid-productos/grid-productos.component';
-
+import { PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, GridProductosComponent],
+  imports: [
+    RouterOutlet,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  title = 'babyline-cliente';
+  // Para ver mas configuraciones visitar  web oficial
+  // https://primeng.org/configuration
+
+  private _primeConfig = inject(PrimeNGConfig);
+
+  constructor(){}
+
+  ngOnInit(): void {
+
+    // Efecto ripple en los componentes de PrimeNG
+    this._primeConfig.ripple = true;
+  }
+
 
 }
