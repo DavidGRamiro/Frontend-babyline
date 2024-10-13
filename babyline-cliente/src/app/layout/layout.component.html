@@ -1,15 +1,13 @@
-<div class="flex flex-column h-screen h-full overflow-hidden">
-  <header class="bg-primary text-white p-3 flex-shrink-0">
-    Header
-  </header>
+<div>
+  <app-header (sideEvent)="getSideEvent($event)"></app-header>
 
-  <div class="flex flex-grow-1 overflow-hidden">
-    <aside class="w-18rem bg-bluegray-100 p-3 overflow-y-auto flex-shrink-0">
-      Sidebar
-    </aside>
+  <div class="layout-sidebar">
+      <app-side-bar [showSideBar]="showSideBar" (onCloseEmit)="getEventFromSideBar($event)"></app-side-bar>
 
-    <main class="flex-grow-1 p-3 overflow-y-auto">
-      Contenido principal
+    <main class="layout-main-container">
+      <div class="">
+        <router-outlet></router-outlet>
+      </div>
     </main>
   </div>
 </div>

@@ -4,7 +4,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
-
+import { SidebarModule } from 'primeng/sidebar';
+import { MenuModule } from 'primeng/menu';
 @NgModule({
   declarations: [],
   imports: [
@@ -12,13 +13,17 @@ import { DialogModule } from 'primeng/dialog';
     ButtonModule,
     InputTextModule,
     TableModule,
-    DialogModule
+    DialogModule,
+    SidebarModule,
+    MenuModule
   ],
   exports: [
     ButtonModule,
     InputTextModule,
     TableModule,
-    DialogModule
+    DialogModule,
+    SidebarModule,
+    MenuModule
   ]
 })
 export class PrimeNgModule { }
