@@ -1,13 +1,16 @@
-<div>
-  <div class="card">
+<div style="width: auto;">
     <p-table #dt1
       styleClass="p-datatable-striped"
       [value]="productos"
       dataKey="id"
-      [rows]="10"
+      [rows]="20"
+      [style]="{'width': '100%'}"
       [rowsPerPageOptions]="[10, 25, 50]"
       [loading]="loading"
       [paginator]="true"
+      responsiveLayout="stack"
+      loadingIcon="pi pi-spinner"
+      [tableStyle]="{'width': '80%', 'font-size': '14px'}"
       [globalFilterFields]="['denominacion_producto', 'ean', 'denominacion_categoria']">
 
       <!-- Botón de limpieza de filtros -->
@@ -24,14 +27,14 @@
       <!-- Declaración de columnas -->
       <ng-template pTemplate="header">
         <tr>
-          <th style="min-width:15rem" pSortableColumn="producto">
+          <th style="max-width: min-content;" pSortableColumn="producto">
             <div class="flex align-items-center">
               Producto
               <p-sortIcon field="producto" />
               <p-columnFilter type="text" field="denominacion_producto" display="menu" />
             </div>
           </th>
-          <th style="min-width:15rem">
+          <th style="min-width:13rem">
             <div class="flex align-items-center">
               EAN
               <p-columnFilter type="text" field="ean" display="menu" />
@@ -63,13 +66,19 @@
               </p-columnFilter>
             </div>
           </th>
+          <th style="min-width:15rem">
+            <div class="flex align-items-center">
+              Codigo interno
+              <p-columnFilter type="text" field="ean" display="menu" />
+            </div>
+          </th>
           <th style="min-width:10rem">
             <div class="flex align-items-center">
               Ubicación
               <p-columnFilter type="date" field="date" display="menu" />
             </div>
           </th>
-          <th style="min-width:10rem">
+          <th style="max-width: fit-content;">
             <div class="flex align-items-center">
               Stock
               <p-columnFilter type="numeric" field="balance" display="menu" currency="USD" />
@@ -105,6 +114,9 @@
               {{ item.denominacion_categoria }}
             </td>
             <td>
+              {{ item.codigo_interno }}
+            </td>
+            <td>
               {{ item.zona }} - {{ item.pasillo }} - {{ item.altura }}
             </td>
             <td>
@@ -116,5 +128,4 @@
           </tr>
         </ng-template>
     </p-table>
-  </div>
 </div>

@@ -36,8 +36,6 @@ export class GridProductosComponent implements OnInit {
 
       next: (data : any) => {
         console.log(data)
-        // Implementacion de la clase oRespuestaAPI común
-        // let respuesta = oResultadoAPI.capturaResultadoAPI(data);
         this.productos = data;
         this.loading = false;
       },
@@ -45,7 +43,7 @@ export class GridProductosComponent implements OnInit {
     })
   }
 
-
+  // TODO: A determinar valores a la función
   getStockStatus(stock: number): string {
     if (stock >= 200) {
       return 'Disponible';
@@ -58,9 +56,9 @@ export class GridProductosComponent implements OnInit {
     }
   }
 
+  // Función para buscar en la tabla Input superior derecho
   buscar(table : Table){
     table.filterGlobal(this.searchValue, 'contains')
-    console.log(table)
   }
 
 
