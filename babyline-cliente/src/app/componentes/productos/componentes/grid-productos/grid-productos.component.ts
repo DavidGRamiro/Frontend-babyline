@@ -1,13 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, type OnInit } from '@angular/core';
+import { Component, inject, Input, type OnInit } from '@angular/core';
 import { ProcuctosService } from '../../servicios/procuctos.service';
 import { oRespuestaAPI } from '../../../../utils/clases/response';
+import { PrimeNgModule } from '../../../../utils/primeNG/primeNg.module';
+import { FormsModule, ɵFormControlCtor } from '@angular/forms';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-grid-productos',
   standalone: true,
   imports: [
-    CommonModule,
+    CommonModule, PrimeNgModule, FormsModule
   ],
   templateUrl: './grid-productos.component.html',
   styleUrl: './grid-productos.component.css',
@@ -16,6 +19,11 @@ export class GridProductosComponent implements OnInit {
 
   // Servicio de productos
   private _proService = inject(ProcuctosService);
+
+  // Tabla de productos
+  public loading: boolean = true;
+  public productos : any[] = [];
+  searchValue: string = '';
 
   ngOnInit(): void {
     this.cargarProductos();
@@ -27,16 +35,35 @@ export class GridProductosComponent implements OnInit {
     this._proService.obtenerProductos().subscribe({
 
       next: (data : any) => {
+        console.log(data)
         // Implementacion de la clase oRespuestaAPI común
-        let respuesta = oResultadoAPI.capturaResultadoAPI(data);
-        console.log(respuesta);
-
+        // let respuesta = oResultadoAPI.capturaResultadoAPI(data);
+        this.productos = data;
+        this.loading = false;
       },
-      error: (error) => {
-        console.log(error);
-      }
+      error: (error) => { }
     })
   }
+
+
+  getStockStatus(stock: number): string {
+    if (stock >= 200) {
+      return 'Disponible';
+    } else if (stock >= 100 && stock < 200) {
+      return 'Poco Stock';
+    } else if (stock < 100 && stock > 0) {
+      return 'Últimas unidades';
+    } else {
+      return 'Sin Stock';
+    }
+  }
+
+  buscar(table : Table){
+    table.filterGlobal(this.searchValue, 'contains')
+    console.log(table)
+  }
+
+
 
 
 

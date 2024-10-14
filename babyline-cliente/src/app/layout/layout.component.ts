@@ -21,13 +21,11 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void { }
 
   getSideEvent(event : any){
-    console.log('Recibido layout',event);
     this.showSideBar = event;
   }
 
-  getEventFromSideBar(e:any){
-    console.log('Evento desde el sidebar',e);
-    this.showSideBar = e;
+  getEventFromSideBar(event:any){
+    this.showSideBar = event;
   }
 
 

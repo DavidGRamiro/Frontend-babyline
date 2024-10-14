@@ -6,6 +6,10 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { SidebarModule } from 'primeng/sidebar';
 import { MenuModule } from 'primeng/menu';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TagModule } from 'primeng/tag';
+import { DropdownModule } from 'primeng/dropdown';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -15,7 +19,10 @@ import { MenuModule } from 'primeng/menu';
     TableModule,
     DialogModule,
     SidebarModule,
-    MenuModule
+    MenuModule,
+    MultiSelectModule,
+    TagModule,
+    DropdownModule,
   ],
   exports: [
     ButtonModule,
@@ -23,7 +30,10 @@ import { MenuModule } from 'primeng/menu';
     TableModule,
     DialogModule,
     SidebarModule,
-    MenuModule
+    MenuModule,
+    MultiSelectModule,
+    TagModule,
+    DropdownModule
   ]
 })
 export class PrimeNgModule { }

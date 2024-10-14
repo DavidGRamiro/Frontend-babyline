@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output, type OnInit } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common'
+import { RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [
-    CommonModule, NgOptimizedImage
+    CommonModule, RouterModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

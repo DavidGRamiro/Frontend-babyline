@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, type OnInit } from '@angular/core';
 import { PrimeNgModule } from '../../utils/primeNG/primeNg.module';
 import { MenuItem } from 'primeng/api';
+import { PrimeIcons } from 'primeng/api';
 
 @Component({
   selector: 'app-side-bar',
@@ -21,35 +22,43 @@ export class SideBarComponent implements OnInit {
   items: MenuItem[] | undefined;
 
     ngOnInit() {
-        this.items = [
+      this.items = [
+        {
+          label: 'Almacén',
+          items: [
             {
-                label: 'Documents',
-                items: [
-                    {
-                        label: 'New',
-                        icon: 'pi pi-plus',
-                        routerLink: ['/productos']
-                    },
-                    {
-                        label: 'Search',
-                        icon: 'pi pi-search'
-                    }
-                ]
+                label: 'Productos',
+                icon: PrimeIcons.TAG,
+                routerLink: ['/productos']
             },
             {
-                label: 'Profile',
-                items: [
-                    {
-                        label: 'Settings',
-                        icon: 'pi pi-cog'
-                    },
-                    {
-                        label: 'Logout',
-                        icon: 'pi pi-sign-out'
-                    }
-                ]
-            }
-        ];
+              label: 'Alta en almacén',
+              icon: PrimeIcons.PLUS,
+            },
+            {
+              label: 'Pedidos',
+              icon: PrimeIcons.BOOK,
+            },
+            {
+              label: 'Búsqueda rápida',
+              icon: PrimeIcons.SEARCH,
+            },
+          ]
+        },
+        {
+            label: 'Usuario',
+            items: [
+                {
+                    label: 'Ajustes',
+                    icon: 'pi pi-cog'
+                },
+                {
+                    label: 'Cerrar sesión',
+                    icon: 'pi pi-sign-out'
+                }
+            ]
+        }
+      ];
     }
 
 

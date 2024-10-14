@@ -1,13 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { LayoutComponent } from "./layout/layout.component";
+import { HttpClient } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    LayoutComponent
-],
+    LayoutComponent, RouterModule,
+  ],
+  providers: [],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -17,13 +20,21 @@ export class AppComponent implements OnInit {
   // https://primeng.org/configuration
 
   private _primeConfig = inject(PrimeNGConfig);
+  private _translate = inject(TranslateService)
 
-  constructor(){}
+  constructor(){
+    this._translate.setDefaultLang('es');
+    this._translate.use('es');
+  }
 
   ngOnInit(): void {
 
     // Efecto ripple en los componentes de PrimeNG
     this._primeConfig.ripple = true;
+    // Configuraciones de idioma
+    this._translate.get('primeng').subscribe(res => this._primeConfig.setTranslation(res));
+
+
   }
 
 
