@@ -23,7 +23,10 @@ export class GridProductosComponent implements OnInit {
   // Tabla de productos
   public loading: boolean = true;
   public productos : any[] = [];
-  searchValue: string = '';
+  public searchValue: string = '';
+
+  // Carga de archivos CSV
+  public file!: File;
 
   ngOnInit(): void {
     this.cargarProductos();
@@ -35,7 +38,6 @@ export class GridProductosComponent implements OnInit {
     this._proService.obtenerProductos().subscribe({
 
       next: (data : any) => {
-        console.log(data)
         this.productos = data;
         this.loading = false;
       },
@@ -57,9 +59,23 @@ export class GridProductosComponent implements OnInit {
   }
 
   // Función para buscar en la tabla Input superior derecho
-  buscar(table : Table){
-    table.filterGlobal(this.searchValue, 'contains')
+  buscar(table : Table){ table.filterGlobal(this.searchValue, 'contains') }
+
+  // Evento de carga de archivo de un csv
+  uploadCSV(event: any) {
+    this.file = event.files[0];
+    console.log(this.file)
+    this._proService.uploadCSV(this.file).subscribe({
+      next: (data : any) => {
+        console.log('Subida arcvhivo CSV', data);
+      },
+      error: (error) => {
+        console.log('ERROR CSV', error);
+      }
+    })
   }
+
+
 
 
 

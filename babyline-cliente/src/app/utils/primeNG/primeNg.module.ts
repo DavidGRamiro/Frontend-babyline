@@ -9,6 +9,7 @@ import { MenuModule } from 'primeng/menu';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TagModule } from 'primeng/tag';
 import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [],
@@ -23,6 +24,7 @@ import { DropdownModule } from 'primeng/dropdown';
     MultiSelectModule,
     TagModule,
     DropdownModule,
+    FileUploadModule
   ],
   exports: [
     ButtonModule,
@@ -33,7 +35,8 @@ import { DropdownModule } from 'primeng/dropdown';
     MenuModule,
     MultiSelectModule,
     TagModule,
-    DropdownModule
+    DropdownModule,
+    FileUploadModule
   ]
 })
 export class PrimeNgModule { }

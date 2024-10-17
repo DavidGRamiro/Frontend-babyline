@@ -15,4 +15,10 @@ export class ProcuctosService {
     return this._http.get(this.url);
   }
 
+  uploadCSV(file: File){
+    const formData = new FormData();
+    formData.append('file', file);
+    return this._http.post(`${this.url}importar_csv/`, formData);
+  }
+
 }

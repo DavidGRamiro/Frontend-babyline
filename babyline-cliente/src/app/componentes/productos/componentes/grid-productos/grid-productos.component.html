@@ -1,4 +1,20 @@
+
+  <div class="m-3">
+    <div class="flex">
+        <p-fileUpload
+          mode="basic"
+          chooseLabel="Cargar CSV"
+          chooseIcon="pi pi-upload"
+          name="demo[]"
+          url="https://www.primefaces.org/cdn/api/upload.php"
+          accept=".csv"
+          maxFileSize="1000000"
+          (onUpload)="uploadCSV($event)" />
+      </div>
+    </div>
+
 <div style="width: auto;">
+
     <p-table #dt1
       styleClass="p-datatable-striped"
       [value]="productos"
