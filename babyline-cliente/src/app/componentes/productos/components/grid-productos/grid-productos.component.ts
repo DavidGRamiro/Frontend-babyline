@@ -6,12 +6,15 @@ import { PrimeNgModule } from '../../../../utils/primeNG/primeNg.module';
 import { FormsModule, ɵFormControlCtor } from '@angular/forms';
 import { Table } from 'primeng/table';
 import { MessageService } from 'primeng/api';
+import { FormProductosComponent } from '../form-productos/form-productos.component';
+import { eAccionHTTP } from '../../../../utils/clases/enums';
+
 
 @Component({
   selector: 'app-grid-productos',
   standalone: true,
   imports: [
-    CommonModule, PrimeNgModule, FormsModule
+    CommonModule, PrimeNgModule, FormsModule, FormProductosComponent
   ],
   templateUrl: './grid-productos.component.html',
   styleUrl: './grid-productos.component.css',
@@ -27,7 +30,11 @@ export class GridProductosComponent implements OnInit {
   public productos : any[] = [];
   searchValue: string = '';
 
+  // Items del menu desplegable superior de la tabla
   public items: any[] = [];
+  public eAccion : eAccionHTTP = eAccionHTTP.POST;
+
+  bDisplay : boolean = false;
 
   ngOnInit(): void {
     this.cargarProductos();
@@ -47,35 +54,25 @@ export class GridProductosComponent implements OnInit {
     })
   }
 
+  // Carga de items en el menu desplegable superior de la tabla
   cargarItems(){
     this.items = [
-      {
-          icon: 'pi pi-pencil',
-          command: () => {
-              this._messageService.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
-          }
+      { 
+        icon: 'pi pi-plus',
+        command: () => { this.altaProducto(); }
       },
       {
-          icon: 'pi pi-refresh',
-          command: () => {
-              this._messageService.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
-          }
+        icon: 'pi pi-pencil',
+        command: () => { this.editProducto(); }
       },
       {
-          icon: 'pi pi-trash',
-          command: () => {
-              this._messageService.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
-          }
+        icon: 'pi pi-trash',
+        command: () => { this.deleteProducto(); }
       },
       {
-          icon: 'pi pi-upload',
-          routerLink: ['/fileupload']
+        icon: 'pi pi-upload',
+        command: () => { this.cargaMasiva(); }
       },
-      {
-          icon: 'pi pi-external-link',
-          target:'_blank',
-          url: 'http://angular.io'
-      }
     ];
   }
 
@@ -95,16 +92,25 @@ export class GridProductosComponent implements OnInit {
   // Funcion asociado al buscador superior de la tabla
   buscar(table : Table){
     table.filterGlobal(this.searchValue, 'contains')
-    console.log(table)
   }
 
+  // Alta de nuevo producto
+  altaProducto(){
+    this.bDisplay = true;
+    this.eAccion = eAccionHTTP.POST;
+  }
 
+  // Edicion de producto
+  editProducto(){
+    this.bDisplay = true;
+    this.eAccion = eAccionHTTP.PUT;
+  }
 
+  // Borrado de prodcuto
+  deleteProducto(){}
 
-
-
-
-
+  // Alta de masiva de productos sobre la base de datos desde CSV
+  cargaMasiva(){}
 
 }
 

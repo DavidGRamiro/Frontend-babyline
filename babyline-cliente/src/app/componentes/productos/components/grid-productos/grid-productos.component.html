@@ -1,8 +1,10 @@
-<div class="m-5 relative">
-  <p-speedDial [model]="items" direction="left" />
+<div class="mb-6 mr-6">
+  <div class="flex align-items-center justify-content-end">
+    <p-speedDial  [buttonStyle]="{ height:'40px', width: '40px'  }" [model]="items" direction="down" />
+  </div>
 </div>
 
-<div class="">
+<div class="mt-3">
   <div class="card">
     
     <p-table #dt1
@@ -110,5 +112,13 @@
     </p-table>
   </div>
 </div>
+
+<p-dialog header="Edit Profile" [modal]="true" [style]="{ width: '25rem' }" [(visible)]="bDisplay"  appendTo="body">
+  <ng-template>
+    <app-form-productos> [eAccion]="eAccion" </app-form-productos>
+  </ng-template>
+</p-dialog>
+
+
 
 <p-toast></p-toast>

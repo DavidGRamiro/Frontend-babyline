@@ -13,3 +13,10 @@ export enum eCodHhtp {
   CONFLICT = 409,
   INTERNAL_SERVER_ERROR = 500
 }
+
+export enum eAccionHTTP {
+  POST = 1,
+  PUT = 2,
+  DELETE = 3
+
+}

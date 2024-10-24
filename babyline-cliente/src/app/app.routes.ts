@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
-import { GridProductosComponent } from './componentes/productos/componentes/grid-productos/grid-productos.component';
+import { GridProductosComponent } from './componentes/productos/components/grid-productos/grid-productos.component';
 
 export const routes: Routes = [
   { path: '', component: LayoutComponent },
