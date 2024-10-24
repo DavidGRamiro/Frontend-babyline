@@ -9,6 +9,8 @@ import { MenuModule } from 'primeng/menu';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TagModule } from 'primeng/tag';
 import { DropdownModule } from 'primeng/dropdown';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [],
@@ -23,6 +25,8 @@ import { DropdownModule } from 'primeng/dropdown';
     MultiSelectModule,
     TagModule,
     DropdownModule,
+    SpeedDialModule,
+    ToastModule
   ],
   exports: [
     ButtonModule,
@@ -33,7 +37,10 @@ import { DropdownModule } from 'primeng/dropdown';
     MenuModule,
     MultiSelectModule,
     TagModule,
-    DropdownModule
+    DropdownModule,
+    SpeedDialModule,
+    ToastModule
+
   ]
 })
 export class PrimeNgModule { }

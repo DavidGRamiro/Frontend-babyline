@@ -1,12 +1,16 @@
-<div>
+<div class="m-5 relative">
+  <p-speedDial [model]="items" direction="left" />
+</div>
+
+<div class="">
   <div class="card">
+    
     <p-table #dt1
       styleClass="p-datatable-striped"
       [value]="productos"
       dataKey="id"
       [rows]="10"
       [rowsPerPageOptions]="[10, 25, 50]"
-      [loading]="loading"
       [paginator]="true"
       [globalFilterFields]="['denominacion_producto', 'ean', 'denominacion_categoria']">
 
@@ -95,26 +99,16 @@
       <!-- Mostar datos -->
         <ng-template pTemplate="body" let-item>
           <tr>
-            <td>
-              {{ item.denominacion_producto }}
-            </td>
-            <td>
-              {{ item.ean }}
-            </td>
-            <td>
-              {{ item.denominacion_categoria }}
-            </td>
-            <td>
-              {{ item.zona }} - {{ item.pasillo }} - {{ item.altura }}
-            </td>
-            <td>
-              {{ item.stock }}
-            </td>
-            <td>
-              {{ getStockStatus(item.stock) }}
-            </td>
+            <td>{{ item.denominacion_producto }}</td>
+            <td>{{ item.ean }}</td>
+            <td>{{ item.denominacion_categoria }}</td>
+            <td>{{ item.zona }} - {{ item.pasillo }} - {{ item.altura }}</td>
+            <td>{{ item.stock }}</td>
+            <td>{{ getStockStatus(item.stock) }}</td>
           </tr>
         </ng-template>
     </p-table>
   </div>
 </div>
+
+<p-toast></p-toast>
