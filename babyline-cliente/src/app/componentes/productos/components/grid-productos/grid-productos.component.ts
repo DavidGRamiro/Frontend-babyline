@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input, type OnInit } from '@angular/core';
-import { ProcuctosService } from '../../servicios/procuctos.service';
+import { ProductosService } from '../../servicios/procuctos.service';
 import { oRespuestaAPI } from '../../../../utils/clases/response';
 import { PrimeNgModule } from '../../../../utils/primeNG/primeNg.module';
 import { FormsModule, ɵFormControlCtor } from '@angular/forms';
 import { Table } from 'primeng/table';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { FormProductosComponent } from '../form-productos/form-productos.component';
 import { eAccionHTTP } from '../../../../utils/clases/enums';
 
@@ -18,23 +18,27 @@ import { eAccionHTTP } from '../../../../utils/clases/enums';
   ],
   templateUrl: './grid-productos.component.html',
   styleUrl: './grid-productos.component.css',
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 })
 export class GridProductosComponent implements OnInit {
 
   // Servicio de productos
-  private _proService = inject(ProcuctosService);
+  private _proService = inject(ProductosService);
   private _messageService = inject(MessageService);
+  private _confirmationService = inject(ConfirmationService);
 
   // Tabla de productos
   public productos : any[] = [];
-  searchValue: string = '';
+  public searchValue: string = '';
+  public productoSeleccionado: any;
 
   // Items del menu desplegable superior de la tabla
   public items: any[] = [];
   public eAccion : eAccionHTTP = eAccionHTTP.POST;
 
-  bDisplay : boolean = false;
+  // Modal de alta y de edicion
+  public bDisplay : boolean = false;
+  public titleForm : string = 'Nuevo producto';
 
   ngOnInit(): void {
     this.cargarProductos();
@@ -47,7 +51,6 @@ export class GridProductosComponent implements OnInit {
     let oResultadoAPI : oRespuestaAPI = new oRespuestaAPI();
     this._proService.obtenerProductos().subscribe({
       next: (data : any) => {
-    
         this.productos = data;
       },
       error: (error) => { }
@@ -67,7 +70,7 @@ export class GridProductosComponent implements OnInit {
       },
       {
         icon: 'pi pi-trash',
-        command: () => { this.deleteProducto(); }
+        command: () => { this.confirm(); }
       },
       {
         icon: 'pi pi-upload',
@@ -102,15 +105,67 @@ export class GridProductosComponent implements OnInit {
 
   // Edicion de producto
   editProducto(){
+    if(!this.productoSeleccionado){
+      this._messageService.add({severity:'warn', summary: 'Atención', detail: 'Selecciona un producto para editar.'});
+      return;
+    }
     this.bDisplay = true;
+    this.titleForm = 'Editar producto';
     this.eAccion = eAccionHTTP.PUT;
   }
 
-  // Borrado de prodcuto
-  deleteProducto(){}
+  // Modal de confirmacion de borrado
+  confirm() {
+    
+    if(!this.productoSeleccionado){
+      this._messageService.add({severity:'warn', summary: 'Atención', detail: 'Selecciona un producto para eliminar.'});
+      return;
+    }
+
+    this._confirmationService.confirm({
+        
+        message: `¿Estás seguro de que quieres eliminar ${this.productoSeleccionado.denominacion_producto} ?`,
+        header: 'Eliminar producto',
+        icon: 'pi pi-exclamation-triangle',
+        acceptIcon:"none",
+        rejectIcon:"none",
+        acceptButtonStyleClass:"p-button-text-success",
+        rejectButtonStyleClass:"p-button-text",
+        accept: () => {
+          this.deleteProducto();
+        },
+        reject: () => {
+          return
+        }
+    });
+  }
+
+   // Borrado de prodcuto
+  deleteProducto(){
+    this._proService.eliminarProducto(this.productoSeleccionado.id).subscribe({
+      next: (data : any) => {
+        this._messageService.add({severity:'success', summary: 'Éxito', detail: 'Producto eliminado correctamente.'});
+        this.cargarProductos();
+      },
+      error: (error) => {
+        this._messageService.add({severity:'error', summary: 'Error', detail: 'Error al eliminar el producto.'});
+      }
+    });
+
+  }
 
   // Alta de masiva de productos sobre la base de datos desde CSV
   cargaMasiva(){}
+
+  // Emitter del formulario para cerrar el modal.
+  getEmitterForm(event: any){
+    this.cargarProductos();
+    this.bDisplay = event;
+  }
+
+  onRowSelect(event: any){
+    this.productoSeleccionado = event.data
+  }
 
 }
 

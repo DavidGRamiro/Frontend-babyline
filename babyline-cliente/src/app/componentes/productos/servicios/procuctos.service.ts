@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class ProcuctosService {
+export class ProductosService {
 
   constructor( private _http : HttpClient) { }
 
@@ -22,14 +22,15 @@ export class ProcuctosService {
   }
 
   // Editamos un producto en especifico
-  editarProducto(producto:any){
-    const url = `${this.url}${producto.id}/`;
+  editarProducto( id_producto:number, producto:any){
+    
+    const url = `${this.url}${id_producto}/`;
     return this._http.put(url, producto);
   }
 
   // Eliminamos un producto definitivamente.
   eliminarProducto(id:number){
-    return this._http.delete(`${this.url}${id}`);
+    return this._http.delete(`${this.url}${id}/`);
   }
 
 }

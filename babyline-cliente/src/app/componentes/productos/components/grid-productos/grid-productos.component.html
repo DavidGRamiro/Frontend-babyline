@@ -4,16 +4,21 @@
   </div>
 </div>
 
-<div class="mt-3">
-  <div class="card">
-    
+<div class="mt-3 grid-style">
+  <div>
     <p-table #dt1
-      styleClass="p-datatable-striped"
+      
+      styleClass="p-datatable-striped datatable-sm'"
       [value]="productos"
       dataKey="id"
       [rows]="10"
+      rowHover="true"
       [rowsPerPageOptions]="[10, 25, 50]"
       [paginator]="true"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      selectionMode="single"
+      [(selection)]="productoSeleccionado"
+      (onRowSelect)="onRowSelect($event)"
       [globalFilterFields]="['denominacion_producto', 'ean', 'denominacion_categoria']">
 
       <!-- Botón de limpieza de filtros -->
@@ -99,8 +104,8 @@
       </ng-template>
 
       <!-- Mostar datos -->
-        <ng-template pTemplate="body" let-item>
-          <tr>
+        <ng-template pTemplate="body" let-item  let-producto>
+          <tr [pSelectableRow]="producto">
             <td>{{ item.denominacion_producto }}</td>
             <td>{{ item.ean }}</td>
             <td>{{ item.denominacion_categoria }}</td>
@@ -113,12 +118,13 @@
   </div>
 </div>
 
-<p-dialog header="Edit Profile" [modal]="true" [style]="{ width: '25rem' }" [(visible)]="bDisplay"  appendTo="body">
-  <ng-template>
-    <app-form-productos> [eAccion]="eAccion" </app-form-productos>
-  </ng-template>
+<p-dialog header="{{titleForm}}" [modal]="true" [style]="{ width: '50rem' }" [(visible)]="bDisplay"  appendTo="body">
+  @if (bDisplay) {
+      <app-form-productos [producto]="productoSeleccionado" [eAccion]="eAccion"  (eventRes)="getEmitterForm($event)" ></app-form-productos>
+  }
 </p-dialog>
 
 
 
 <p-toast></p-toast>
+<p-confirmDialog />

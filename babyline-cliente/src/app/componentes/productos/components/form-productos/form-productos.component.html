@@ -1,1 +1,45 @@
-ola
+
+<div class="form mt-5">
+    <form [formGroup]="productoForm" class="layout-form" (ngSubmit)="onSubmit()">
+        <p-floatLabel>
+            <input type="text" pInputText class="form-denominacion" id="denominacion_producto" formControlName="denominacion_producto">
+            <label for="denominacion_producto">Denominación</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input type="text" pInputText class="form-denominacion" id="ean" formControlName="ean">
+            <label for="ean">EAN</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <p-inputNumber type="number"  inputId="currency-germany" mode="currency" currency="EUR" class="form-control" id="precio_venta" [(ngModel)]="precio_venta"  formControlName="precio_venta" />
+            <label for="number-input">Precio de venta</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <p-inputNumber type="number" mode="currency" currency="EUR" class="form-control" id="precio_compra"  [(ngModel)]="precio_compra"  formControlName="precio_compra" />
+            <label for="precio_compra">Precio de compra</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input type="text" pInputText class="form-cod-interno" id="codigo_interno" formControlName="codigo_interno">
+            <label for="codigo_interno">Código interno</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input type="text" pInputText class="form-control" id="fabricante" formControlName="fabricante">
+            <label for="fabricante">Fabricante</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input type=""  pInputText class="form-control" id="categoria" formControlName="categoria">
+            <label for="categoria">Categoria</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input type="" pInputText class="form-control" id="ubicacion" formControlName="ubicacion">
+            <label for="ubicacacion">Ubicación</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <p-inputNumber type="number"  class="form-control" id="stock" formControlName="stock" [(ngModel)]="stock"  />
+            <label for="stock">Stock</label>
+        </p-floatLabel>
+        
+        <button type="submit" pButton  pRipple label="Guardar" class="p-button-success"></button>
+    </form>
+
+
+</div>
