@@ -29,11 +29,14 @@ export class SideBarComponent implements OnInit {
             {
                 label: 'Productos',
                 icon: PrimeIcons.TAG,
-                routerLink: ['/productos']
+                routerLink: ['/productos'],
+                command: (event) => this.onMenuItemClick(event)
             },
             {
               label: 'Alta en almacén',
               icon: PrimeIcons.PLUS,
+              routerLink: ['/almacen'],
+              command: (event) => this.onMenuItemClick(event)
             },
             {
               label: 'Pedidos',
@@ -64,6 +67,10 @@ export class SideBarComponent implements OnInit {
 
   visibleChange(event : any){
     this.onCloseEmit.emit(event)
+  }
+
+  onMenuItemClick(event: any) {
+    this.onCloseEmit.emit(false);
   }
 
 }

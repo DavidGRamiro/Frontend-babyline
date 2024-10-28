@@ -80,15 +80,29 @@ export class GridProductosComponent implements OnInit {
   }
 
   // Funcion para obtener el estado del producto
-  getStockStatus(stock: number): string {
-    if (stock >= 200) {
-      return 'Disponible';
-    } else if (stock >= 100 && stock < 200) {
-      return 'Poco Stock';
-    } else if (stock < 100 && stock > 0) {
+  getStockStatus(stock: number) {
+    
+    if(stock === 0){
+      return 'secondary';
+    }else if(stock > 0 && stock <= 5){
+      return;
+    }else if(stock > 5 && stock <= 10){
+      return 'info';
+    }else{
+      return 'success';
+    }
+  
+  }
+
+  getDisplayStock(stock: number) {
+    if(stock === 0){
+      return 'Sin stock';
+    }else if(stock > 0 && stock <= 5){
       return 'Últimas unidades';
-    } else {
-      return 'Sin Stock';
+    }else if(stock > 5 && stock <= 10){
+      return 'Stock bajo';
+    }else{
+      return 'Stock disponible';
     }
   }
 

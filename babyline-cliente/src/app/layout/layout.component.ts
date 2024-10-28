@@ -28,6 +28,4 @@ export class LayoutComponent implements OnInit {
     this.showSideBar = event;
   }
 
-
-
 }

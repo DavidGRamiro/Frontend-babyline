@@ -14,6 +14,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [],
@@ -32,7 +33,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ToastModule,
     ConfirmDialogModule,
     FloatLabelModule,
-    InputNumberModule
+    InputNumberModule,
+    CardModule
   ],
   exports: [
     ButtonModule,
@@ -48,7 +50,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ToastModule,
     ConfirmDialogModule,
     FloatLabelModule,
-    InputNumberModule
+    InputNumberModule,
+    CardModule
 
   ]
 })

@@ -111,7 +111,7 @@
             <td>{{ item.denominacion_categoria }}</td>
             <td>{{ item.zona }} - {{ item.pasillo }} - {{ item.altura }}</td>
             <td>{{ item.stock }}</td>
-            <td>{{ getStockStatus(item.stock) }}</td>
+            <td><p-tag [value]="getDisplayStock(item.stock)" [rounded]="true" [severity]="getStockStatus(item.stock)" /></td>
           </tr>
         </ng-template>
     </p-table>
