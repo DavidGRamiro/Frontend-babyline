@@ -3,7 +3,7 @@ import { Component, EventEmitter, inject, Input, Output, type OnInit } from '@an
 import { PrimeNgModule } from '../../../../utils/primeNG/primeNg.module';
 import { eAccionHTTP } from '../../../../utils/clases/enums';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ProductosService } from '../../servicios/procuctos.service';
+import { ProductosService } from '../../services/procuctos.service';
 import { MessageService } from 'primeng/api';
 
 @Component({

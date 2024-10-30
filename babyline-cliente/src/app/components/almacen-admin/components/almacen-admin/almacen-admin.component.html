@@ -62,3 +62,21 @@
             </p-card>
         </div>
     </div>
+
+
+<p-dialog header="{{titleForm}}" [modal]="true" [style]="{ width: 'auto' }" [(visible)]="bDisplay"  appendTo="body" (onHide)="closeAll()">
+    @if(showMov) {
+        <app-movimientos></app-movimientos>
+    }@else if(showGestion){
+        <app-users (eventRes)="getEmitterUser($event)"></app-users>
+    }@else if(showControl){
+        <app-gestion-pedidos></app-gestion-pedidos>
+    }@else if(showLogError){
+        <app-error-log></app-error-log>
+    }@else if(showSync){
+        <app-sync></app-sync>
+    }@else{
+        <h1>Nada que mostrar</h1>
+    }
+</p-dialog>
+<p-toast></p-toast>

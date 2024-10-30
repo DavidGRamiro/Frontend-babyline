@@ -7,7 +7,10 @@
     },
     "angular-*": {
       "externalTemplate": true,
-      "style": "scss"
-    }
-  }
+      "style": "css"
+    },
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true
+  
 }

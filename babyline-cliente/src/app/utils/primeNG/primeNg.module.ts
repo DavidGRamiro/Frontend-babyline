@@ -15,6 +15,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CardModule } from 'primeng/card';
+import { PasswordModule } from 'primeng/password';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [],
@@ -34,7 +36,9 @@ import { CardModule } from 'primeng/card';
     ConfirmDialogModule,
     FloatLabelModule,
     InputNumberModule,
-    CardModule
+    CardModule,
+    PasswordModule,
+    RadioButtonModule
   ],
   exports: [
     ButtonModule,
@@ -51,7 +55,9 @@ import { CardModule } from 'primeng/card';
     ConfirmDialogModule,
     FloatLabelModule,
     InputNumberModule,
-    CardModule
+    CardModule,
+    PasswordModule,
+    RadioButtonModule
 
   ]
 })
