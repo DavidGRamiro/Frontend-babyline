@@ -17,4 +17,13 @@ export class AlmacenAdminComponent implements OnInit {
 
     constructor() { }
 
+    showMovimientos() {}
+    
+    showGestionUsers() {}
+
+    showControlPedidos() {}
+
+    showErrors() {}
+
+    syncBBDD() {}
 }
