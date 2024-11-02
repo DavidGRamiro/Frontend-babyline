@@ -10,11 +10,12 @@ import {
 } from '@angular/forms';
 import { UsersService } from '../../../services/users.service';
 import { MessageService } from 'primeng/api';
+import { UserTableComponent } from '../user-table/user-table.component';
 
 @Component({
   selector: 'app-user-form',
   standalone: true,
-  imports: [CommonModule, PrimeNgModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, PrimeNgModule, FormsModule, ReactiveFormsModule , UserTableComponent],
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css',
 })
@@ -25,8 +26,6 @@ export class UserFormComponent implements OnInit {
 
   private _userService = inject(UsersService);
   private _messageService = inject(MessageService);
-
-  public passwordValue : string = '';
 
   // Formulario
   public formUser = new FormGroup({
@@ -44,6 +43,12 @@ export class UserFormComponent implements OnInit {
     { name: 'Logística', key: 'L', value: '3' },
     { name: 'Oficina', key: 'O', value: '4' },
   ];
+
+  // Variables de visualización
+  public showForm = true;
+
+
+
 
   ngOnInit(): void {}
 
@@ -63,11 +68,12 @@ export class UserFormComponent implements OnInit {
   altaUsuario() {
     
     let validador = this.formUser.valid;
-    let usuario = {...this.formUser.value};
-    let rol = this.roles.find((rol) => rol.key === usuario.rol);
-    usuario.rol = rol!.value;
 
     if (validador) {
+      let usuario = {...this.formUser.value};
+      let rol = this.roles.find((rol) => rol.key === usuario.rol);
+      usuario.rol = rol!.value;
+
       this._userService.altaUsuario(usuario).subscribe({
         next: (data) => {
           this.eventRes.emit(false)
@@ -92,5 +98,9 @@ export class UserFormComponent implements OnInit {
         detail: 'Debes de rellenar todos los campos obligatorios',
       });
     }
+  }
+
+  getEmitterForm(event: any) {
+    this.showForm = true;
   }
 }

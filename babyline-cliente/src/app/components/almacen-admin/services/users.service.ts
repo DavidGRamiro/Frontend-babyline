@@ -20,4 +20,13 @@ export class UsersService {
     return this._http.post(this._url, usuario);
   }
 
+  // Actualización de un usuario
+  updateUsuario(usuario: any) {
+    return this._http.put(this._url + usuario.id + '/', usuario);
+  }
+
+  deleteUser(id: any) {
+    return this._http.delete(this._url + id + '/');
+  }
+
 }
