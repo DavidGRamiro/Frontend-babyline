@@ -9,4 +9,5 @@ export const routes: Routes = [
   { path: 'productos', component: GridProductosComponent },
   { path: 'almacen', component: AlmacenAdminComponent },
 
+
 ];

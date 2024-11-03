@@ -8,11 +8,11 @@ export class AuthService {
 
   constructor(private _http : HttpClient) { }
 
-  public url = 'http://localhost:8000/login';
+  public url = 'http://localhost:8000/usuarios/';
 
-
+  // Procesa la respuesta de login del usuario
   login(data: any){
-    return this._http.post(this.url, data);
+    return this._http.post(`${this.url}login/`, data);
   }
 
 }

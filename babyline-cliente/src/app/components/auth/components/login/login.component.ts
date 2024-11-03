@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, type OnInit } from '@angular/core';
+import { Component, inject, type OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { PrimeNgModule } from '../../../../utils/primeNG/primeNg.module';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,17 +18,29 @@ import { PrimeNgModule } from '../../../../utils/primeNG/primeNg.module';
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
+
+  private _authService = inject(AuthService);
+
   ngOnInit(): void {}
 
   public loginForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
 
   login() {
-		console.log('login', this.loginForm.valid);
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      
+      this._authService.login(this.loginForm.value).subscribe({
+        next : (data:any) => {
+          console.log('Sesion iniciada',data);
+        },
+        error: (error:any) => {
+          console.log(error);
+        }
+      })
+
+
     }
   }
 }
