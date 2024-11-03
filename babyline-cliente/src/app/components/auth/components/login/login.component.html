@@ -1,1 +1,29 @@
-<p>login works!</p>,
+
+<div class="grid container">
+  <div class="col layout-img">
+    <img src="assets/svg/Login-bro.svg" alt="Imagen de inicio de sesión">
+  </div>  
+  <div class=" col login-form text-center">
+    <div class="card-form m-5">
+      <img id="img-form" src="assets/images/baby.png" alt="Imagen de inicio de sesión">
+      <form [formGroup]="loginForm"  class="m-5 p-5" (ngSubmit)="login()">
+        <div class="mt-2 text-center	" style="width: 50%;">
+          <p-floatLabel >
+            <input pInputText id="email" style="width: 100%;" formControlName="email"/>
+            <label for="email">Email</label>
+          </p-floatLabel>
+        </div>
+        <div class="mt-5" style="width: 50%;">
+          <p-floatLabel>
+            <input pPassword id="password" [showPassword]="false"  [feedback]="false" style="width: 100%;" formControlName="password"/>
+            <label for="password">Contraseña</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="mt-4">
+          <button pButton type="submit" label="Iniciar sesión" class="w-full"></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

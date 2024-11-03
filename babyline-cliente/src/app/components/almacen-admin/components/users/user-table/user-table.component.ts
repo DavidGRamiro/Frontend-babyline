@@ -79,6 +79,7 @@ export class UserTableComponent implements OnInit {
     }
   }
 
+  // Pop up de confirmación para eliminar un usuario
   confirm(user:any) {
     this._confirmationService.confirm({
         
@@ -98,6 +99,7 @@ export class UserTableComponent implements OnInit {
     });
   }
 
+  // Evento de eliminación de un usuario al confirmar el pop up
   eliminarUsuario(user:any){
     this._userService.deleteUser(user.id).subscribe({
       next: (data : any) => {

@@ -3,7 +3,7 @@ img{
     margin-left: 60px;
     margin-top: 20px;
     width: 70%;
-    max-height:150px;
+    max-height:125px;
 
 }
 
@@ -12,7 +12,8 @@ img{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    max-height: 30px;
+    min-height: 20px;
+    max-height: 25px;
 }
 
 .custom-card{

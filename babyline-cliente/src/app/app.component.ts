@@ -4,12 +4,14 @@ import { PrimeNGConfig } from 'primeng/api';
 import { LayoutComponent } from "./layout/layout.component";
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { LoginComponent } from "./components/auth/components/login/login.component";
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     LayoutComponent, RouterModule,
-  ],
+    LoginComponent, LoginComponent, RouterOutlet
+],
   providers: [],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

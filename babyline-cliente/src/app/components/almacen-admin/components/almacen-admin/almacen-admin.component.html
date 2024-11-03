@@ -2,7 +2,7 @@
     <div class="container">
 
         <div class="custom-card">
-            <p-card header="Movimientos de almacén" styleClass="shadow-5"  subheader="Visualizacion de movimientos" [style]="{ width: '360px' }">
+            <p-card header="Movimientos de almacén" styleClass="shadow-5"  subheader="Visualizacion de movimientos" [style]="{ width: '280px', margin:'20px' }">
                 <ng-template pTemplate="header">
                     <img alt="Card" src="assets/svg/movimientos.svg" />
                 </ng-template>
@@ -14,7 +14,7 @@
             </p-card>
         </div>
         <div class="custom-card">
-            <p-card header="Gestión de usuarios" styleClass="shadow-5" subheader="Mantenimiento de usuarios Babyline" [style]="{ width: '360px' }">
+            <p-card header="Gestión de usuarios" styleClass="shadow-5" subheader="Mantenimiento de usuarios Babyline" [style]="{ width: '280px' }">
                 <ng-template pTemplate="header">
                     <img alt="Card" src="assets/svg/login.svg" />
                 </ng-template>
@@ -26,7 +26,7 @@
             </p-card>
         </div>
         <div class="custom-card">
-            <p-card header="Gestión de pedidos" styleClass="shadow-5" subheader="Control de pedidos realizados y por hacer" [style]="{ width: '360px'}">
+            <p-card header="Gestión de pedidos" styleClass="shadow-5" subheader="Control de pedidos entrantes" [style]="{ width: '280px'}">
                 <ng-template pTemplate="header">
                     <img alt="Card" src="assets/svg/pedidos.svg" />
                 </ng-template>
@@ -38,7 +38,7 @@
             </p-card>
         </div>
         <div class="custom-card">
-            <p-card header="Reportes" styleClass="shadow-5" subheader="Reportes de errores" [style]="{ width: '360px' }">
+            <p-card header="Reportes" styleClass="shadow-5" subheader="Reportes de errores" [style]="{ width: '280px' }">
                 <ng-template pTemplate="header">
                     <img alt="Card" src="assets/svg/reports.svg" />
                 </ng-template>
@@ -50,12 +50,12 @@
             </p-card>
         </div>
         <div class="">
-            <p-card header="Sincronizar bases de datos" styleClass="shadow-5" subheader="Sincronización con todas las bases de datos" [style]="{ width: '360px' }">
+            <p-card header="Sincronizar bases de datos" styleClass="shadow-5" subheader="Sincronización con BBDD" [style]="{ width: '280px' }">
                 <ng-template pTemplate="header">
                     <img alt="Card" src="assets/svg/sync.svg" />
                 </ng-template>
                 <ng-template pTemplate="footer">
-                    <div class="flex gap-3 mt-1">
+                    <div class="flex gap-2 mt-1">
                         <p-button label="Gestión" class="w-full" styleClass="w-full" (onClick)="syncBBDD()" />
                     </div>
                 </ng-template>
