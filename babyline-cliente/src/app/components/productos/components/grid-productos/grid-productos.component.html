@@ -19,7 +19,10 @@
       selectionMode="single"
       [(selection)]="productoSeleccionado"
       (onRowSelect)="onRowSelect($event)"
-      [globalFilterFields]="['denominacion_producto', 'ean', 'denominacion_categoria']">
+      [globalFilterFields]="['denominacion_producto', 'ean', 'denominacion_categoria']"
+      dataKey="id"
+      currentPageReportTemplate="Mostrando {first} de {last} de {totalRecords} productos"
+      [showCurrentPageReport]="true">
 
       <!-- Botón de limpieza de filtros -->
       <ng-template pTemplate="caption">

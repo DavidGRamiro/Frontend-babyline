@@ -1,1 +1,18 @@
-<p>movimientos works!</p>,
+<div class="card">
+  <p-table [value]="trazas" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+          <tr>
+              <th>Accion</th>
+              <th>Descripción</th>
+              <th>Usuario</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-traza>
+          <tr>
+              <td>{{ traza.accion }}</td>
+              <td>{{ traza.descripcion }}</td>
+              <td>{{ traza.denominacion_usuario }}</td>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>

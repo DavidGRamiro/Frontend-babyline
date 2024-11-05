@@ -33,6 +33,8 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
   });
 
+
+  // Login y almacenamiento de datos en storage
   login() {
     if (this.loginForm.valid) {
       // Inicio de sesión y almacenamiento de datos en storage
