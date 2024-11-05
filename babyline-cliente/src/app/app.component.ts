@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { LayoutComponent } from "./layout/layout.component";
-import { HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginComponent } from "./components/auth/components/login/login.component";
 @Component({
@@ -11,8 +11,7 @@ import { LoginComponent } from "./components/auth/components/login/login.compone
   imports: [
     LayoutComponent, RouterModule,
     LoginComponent, LoginComponent, RouterOutlet
-],
-  providers: [],
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

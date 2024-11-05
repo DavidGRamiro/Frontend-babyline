@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ProductosService {
 
-  constructor( private _http : HttpClient) { }
+  constructor( private _http : HttpClient) {}
 
   // TODO: Hacer algo comun para obtener la url por inyeccion de servicio
   private url = `http://localhost:8000/productos/`;

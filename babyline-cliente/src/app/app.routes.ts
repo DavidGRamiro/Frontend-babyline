@@ -6,8 +6,9 @@ import { LoginComponent } from './components/auth/components/login/login.compone
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'productos', component: GridProductosComponent },
-  { path: 'almacen', component: AlmacenAdminComponent },
-
+  { path: 'home', component: LayoutComponent, children: [
+    { path: 'productos', component: GridProductosComponent },
+    { path: 'almacen', component: AlmacenAdminComponent },
+  ]},
 
 ];

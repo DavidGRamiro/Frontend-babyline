@@ -29,13 +29,13 @@ export class SideBarComponent implements OnInit {
             {
                 label: 'Productos',
                 icon: PrimeIcons.TAG,
-                routerLink: ['/productos'],
+                routerLink: ['/home/productos'],
                 command: (event) => this.onMenuItemClick(event)
             },
             {
               label: 'Alta en almacén',
               icon: PrimeIcons.PLUS,
-              routerLink: ['/almacen'],
+              routerLink: ['/home/almacen'],
               command: (event) => this.onMenuItemClick(event)
             },
             {
