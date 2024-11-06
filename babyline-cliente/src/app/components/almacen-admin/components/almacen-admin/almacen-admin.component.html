@@ -64,7 +64,7 @@
     </div>
 
 
-<p-dialog header="{{titleForm}}" [modal]="true" [style]="{ width: 'auto' }" [(visible)]="bDisplay"  appendTo="body" (onHide)="closeAll()">
+<p-dialog header="{{titleForm}}" [modal]="true" [style]="{ width: '80%' }" maximizable="true" [(visible)]="bDisplay"  appendTo="body" (onHide)="closeAll()">
     @if(showMov) {
         <app-movimientos></app-movimientos>
     }@else if(showGestion){

@@ -17,6 +17,10 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { CardModule } from 'primeng/card';
 import { PasswordModule } from 'primeng/password';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { TabViewModule } from 'primeng/tabview';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
   declarations: [],
@@ -38,7 +42,12 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     InputNumberModule,
     CardModule,
     PasswordModule,
-    RadioButtonModule
+    RadioButtonModule,
+    TabViewModule,
+    AvatarModule,
+    AvatarGroupModule,
+    BadgeModule
+    
   ],
   exports: [
     ButtonModule,
@@ -57,8 +66,11 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     InputNumberModule,
     CardModule,
     PasswordModule,
-    RadioButtonModule
-
+    RadioButtonModule,
+    TabViewModule,
+    AvatarModule,
+    AvatarGroupModule,
+    BadgeModule
   ]
 })
 export class PrimeNgModule { }
