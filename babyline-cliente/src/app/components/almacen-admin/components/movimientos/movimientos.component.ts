@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, type OnInit } from '@angular/core';
 import { MovimientosService } from '../../services/movimientos.service';
 import { PrimeNgModule } from '../../../../utils/primeNG/primeNg.module';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-movimientos',
@@ -12,7 +13,10 @@ import { PrimeNgModule } from '../../../../utils/primeNG/primeNg.module';
 })
 export class MovimientosComponent implements OnInit {
   
+  // Servicios
   private _movService = inject(MovimientosService);
+  private _msgService = inject(MessageService);
+
   public trazas : any = [];
 
   ngOnInit(): void {
@@ -23,10 +27,9 @@ export class MovimientosComponent implements OnInit {
     this._movService.getMovimientos().subscribe({
       next: (data) => {
         this.trazas = data;
-        console.log(data);
       },
       error: (error) => {
-        console.log(error);
+        this._msgService.add({severity:'error', summary:'Error', detail:'No se ha podido cargar el historial de movimientos'});
       }
     })
   }
