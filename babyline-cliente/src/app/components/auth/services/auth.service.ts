@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private _http : HttpClient) { }
+  constructor(private _http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) { }
 
   public url = 'http://localhost:8000/usuarios/';
   private _token: string = '';
@@ -16,9 +18,12 @@ export class AuthService {
     return this._http.post(`${this.url}login/`, data);
   }
   
-  // Función que nos indica si tenemos el token alamacenado en el localStorage
+  // Función que nos indica si tenemos el token almacenado en el localStorage
   isAuthenticated(){
-    return !!localStorage.getItem('token');
+    if (isPlatformBrowser(this.platformId)) {
+      return !!localStorage.getItem('token');
+    }
+    return false;
   }
 
 }

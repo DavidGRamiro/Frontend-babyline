@@ -67,8 +67,6 @@
 <p-dialog header="{{titleForm}}" [modal]="true" [style]="{ width: '80%' }" maximizable="true" [(visible)]="bDisplay"  appendTo="body" (onHide)="closeAll()">
     @if(showMov) {
         <app-movimientos></app-movimientos>
-    }@else if(showGestion){
-        <app-users (eventRes)="getEmitterUser($event)"></app-users>
     }@else if(showControl){
         <app-gestion-pedidos></app-gestion-pedidos>
     }@else if(showLogError){
@@ -77,6 +75,13 @@
         <app-sync></app-sync>
     }@else{
         <h1>Nada que mostrar</h1>
+    }
+</p-dialog>
+
+
+<p-dialog header="{{titleForm}}" [modal]="true" [style]="{ width: '55%' }" maximizable="true" [(visible)]="showGestion"  appendTo="body" (onHide)="closeAll()">
+    @if(showGestion) {
+        <app-users (eventRes)="getEmitterUser($event)"></app-users>
     }
 </p-dialog>
 <p-toast></p-toast>

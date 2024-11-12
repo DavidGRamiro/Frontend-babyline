@@ -41,6 +41,8 @@ export class SideBarComponent implements OnInit {
             {
               label: 'Pedidos',
               icon: PrimeIcons.BOOK,
+              routerLink: ['/home/pedidos'],
+              command: (event) => this.onMenuItemClick(event)
             },
             {
               label: 'Búsqueda rápida',

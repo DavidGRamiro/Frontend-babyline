@@ -42,7 +42,6 @@ export class AlmacenAdminComponent implements OnInit {
     
     showGestionUsers() { 
         this.showGestion = true;
-        this.bDisplay = true;
         this.titleForm = 'Gestión de usuarios';
     }
 

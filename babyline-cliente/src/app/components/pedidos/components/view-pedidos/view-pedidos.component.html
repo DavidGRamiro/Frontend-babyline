@@ -1,0 +1,34 @@
+<div class="card">
+  <p-table [value]="pedidos" [tableStyle]="{'min-width': '60rem'}">
+      <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+              Pedidos
+              <p-button icon="pi pi-refresh"  (onClick)="refresh()"/>
+          </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+          <tr>
+              <th>Núm. pedido</th>
+              <th>Tienda</th>
+              <th>Items</th>
+              <th>Estado</th>
+              <th>Prioridad</th>
+
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-pedido>
+          <tr>
+              <td>{{pedido.numero_pedido}}</td>
+              <td>{{ getTienda(pedido.tienda)}}</td>
+              <td>{{pedido.items }}</td>
+              <td><p-tag [value]="pedido.estado" [severity]="getEstado(pedido.estado)" /></td>
+              <td><p-tag [value]="pedido.prioridad" [severity]="getPrioridad(pedido.prioridad)" /></td>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+          <div class="flex align-items-center justify-content-between">
+              En total hay {{pedidos ? pedidos.length : 0 }} pedidos.
+          </div>
+      </ng-template>
+  </p-table>
+</div>
