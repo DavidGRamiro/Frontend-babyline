@@ -14,4 +14,9 @@ export class PedidosService {
     return this._http.get(this._url, { params })
   }
 
+  updatePedido(idPedido:number, data:any){
+    const url = `${this._url}/${idPedido}/`
+    return this._http.put(url, data)
+  }
+
 }

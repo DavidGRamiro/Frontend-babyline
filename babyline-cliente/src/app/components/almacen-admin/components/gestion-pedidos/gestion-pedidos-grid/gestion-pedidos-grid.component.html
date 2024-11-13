@@ -27,7 +27,7 @@
                 pRipple 
                 icon="pi pi-user" 
                 class="p-button-rounded p-button-text"
-                (click)="asignarPedido(rowData)">
+                (click)="confirm($event,rowData)">
             </button>
           </td>
         }
@@ -36,3 +36,21 @@
     </ng-template>
   </p-table>
 </div>
+
+
+<!-- Pop up que aparece cuando se quiere asignar un pedido a un usuario -->
+<p-confirmPopup>
+  <ng-template pTemplate="content" let-message>
+    <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+        <p>{{ message.message }}</p>
+          
+        <p-dropdown 
+          [options]="usuarios" 
+          [(ngModel)]="usuarioSeleccionado" 
+          optionLabel="name" 
+          [style]="{'width': '100%'}"
+          placeholder="Seleccione un usuario" />
+      </div>
+  </ng-template>
+</p-confirmPopup>
+<p-toast/>

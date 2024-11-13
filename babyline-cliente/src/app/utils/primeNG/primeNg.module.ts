@@ -21,6 +21,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { BadgeModule } from 'primeng/badge';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @NgModule({
   declarations: [],
@@ -46,7 +47,8 @@ import { BadgeModule } from 'primeng/badge';
     TabViewModule,
     AvatarModule,
     AvatarGroupModule,
-    BadgeModule
+    BadgeModule,
+    ConfirmPopupModule
     
   ],
   exports: [
@@ -70,7 +72,9 @@ import { BadgeModule } from 'primeng/badge';
     TabViewModule,
     AvatarModule,
     AvatarGroupModule,
-    BadgeModule
+    BadgeModule,
+    ConfirmPopupModule
+
   ]
 })
 export class PrimeNgModule { }

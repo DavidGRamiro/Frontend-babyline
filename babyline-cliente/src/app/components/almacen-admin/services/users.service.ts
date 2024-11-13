@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class UsersService {
   constructor() { }
 
   // Obtener todos los usuarios
-  getUsers() {
-    return this._http.get(this._url);
+  getUsers():Observable<any> {
+    return this._http.get<any[]>(this._url);
   }
 
   // Alta de un usuario

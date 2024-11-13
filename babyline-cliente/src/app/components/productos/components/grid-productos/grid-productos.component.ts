@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input, type OnInit } from '@angular/core';
-import { ProductosService } from '../../services/procuctos.service';
+import { ProductosService } from '../../services/productos.service';
 import { oRespuestaAPI } from '../../../../utils/clases/response';
 import { PrimeNgModule } from '../../../../utils/primeNG/primeNg.module';
 import { FormsModule, ɵFormControlCtor } from '@angular/forms';

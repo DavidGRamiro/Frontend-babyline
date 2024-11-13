@@ -16,7 +16,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ProductosService } from '../../services/procuctos.service';
+import { ProductosService } from '../../services/productos.service';
 import { MessageService } from 'primeng/api';
 
 @Component({
