@@ -76,7 +76,7 @@ import { TooltipModule } from 'primeng/tooltip';
     AvatarGroupModule,
     BadgeModule,
     ConfirmPopupModule,
-    TooltipModule
+    TooltipModule,
 
   ]
 })

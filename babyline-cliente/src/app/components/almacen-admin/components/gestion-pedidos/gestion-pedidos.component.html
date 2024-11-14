@@ -1,7 +1,7 @@
 <div class="card">
 
   <div class="button-header">
-    <p-button icon="pi pi-check"  (onClick)="addPedido()" [rounded]="true" [outlined]="true" />
+    <p-button icon="pi pi-plus"  (onClick)="addPedido()" [rounded]="true" [outlined]="true" />
 
   </div>
   <p-tabView styleClass="tabview-custom">
@@ -48,3 +48,86 @@
     </p-tabPanel>
   </p-tabView>
 </div>
+
+
+
+<!--  Dialog para dar de alta un nuevo pedido y todos sus items.  -->
+<p-dialog 
+    header="Header" 
+    [modal]="true"
+    [(visible)]="bDisplay" 
+    [style]="{ width: '80rem', height: '80rem' }" 
+    [maximizable]="true">
+        
+      <div class="mt-5">
+        <form>
+          <div class="formgroup-inline">
+            <div class="field">
+              <p-floatLabel>
+                <input pInputText id="cod_pedido" formControlName="cod_pedido" />
+                <label for="cod_pedido">Cód. Pedido</label>
+              </p-floatLabel>
+            </div>
+
+            <div class="field">
+              <p-dropdown 
+                formControlName="tienda" 
+                [options]="tiendas"
+                optionLabel="name"
+                placeholder="Tienda" />
+            </div>
+
+            <div class="field">
+              <p-dropdown 
+                formControlName="prioridad" 
+                [options]="prioridades"
+                optionLabel="name"
+                placeholder="Prioridad" />
+            </div>
+          </div>
+
+          <h3>Seleccione los articulos a incluir en el pedido</h3>
+
+          <div class="card">
+            <p-pickList 
+                [source]="productos" 
+                [target]="targetProductos" 
+                sourceHeader="Disponibles" 
+                targetHeader="Seleccionado" 
+                [dragdrop]="true" 
+                [responsive]="true" 
+                [sourceStyle]="{ height: '30rem' }"
+                [targetStyle]="{ height: '30rem' }" 
+                filterBy="name" 
+                sourceFilterPlaceholder="Search by name" 
+                targetFilterPlaceholder="Search by name" 
+                breakpoint="1400px">
+                    <ng-template let-product pTemplate="item">
+                        <div class="flex flex-wrap p-2 align-items-center gap-3">
+                            <img 
+                                class="w-4rem shadow-2 flex-shrink-0 border-round" 
+                                src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}" 
+                                alt="{item.name}" />
+                            <div class="flex-1 flex flex-column gap-2">
+                                <span class="font-bold">
+                                    {{ product.name }}
+                                </span>
+                                <div class="flex align-products-center gap-2">
+                                    <i class="pi pi-tag text-sm"></i>
+                                    <span>
+                                        {{ product.category }}
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="font-bold text-900">
+                                {{ '$' + product.price }}
+                            </span>
+                        </div>
+                    </ng-template>
+            </p-pickList>
+        </div>
+        </form>
+      </div>
+
+
+</p-dialog>
