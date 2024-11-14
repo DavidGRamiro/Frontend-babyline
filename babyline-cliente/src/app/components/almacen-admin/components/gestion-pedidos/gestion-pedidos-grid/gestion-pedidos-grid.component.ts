@@ -95,9 +95,7 @@ export class GestionPedidosGridComponent implements OnInit {
         accept: () => {
           this.asignarPedidoUsuario(pedido)
         },
-        reject: () => {
-            this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-        }
+        reject: () => { }
       });
     }
     catch (error) {

@@ -22,6 +22,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { BadgeModule } from 'primeng/badge';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [],
@@ -48,7 +49,8 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     AvatarModule,
     AvatarGroupModule,
     BadgeModule,
-    ConfirmPopupModule
+    ConfirmPopupModule,
+    TooltipModule
     
   ],
   exports: [
@@ -73,7 +75,8 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
     AvatarModule,
     AvatarGroupModule,
     BadgeModule,
-    ConfirmPopupModule
+    ConfirmPopupModule,
+    TooltipModule
 
   ]
 })

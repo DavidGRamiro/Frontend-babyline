@@ -1,0 +1,7 @@
+.button-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end; /* Alinea los elementos al final del contenedor */
+  align-items: center; /* Alinea los elementos verticalmente al centro */
+  padding: 10px;
+}
