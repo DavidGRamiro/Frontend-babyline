@@ -1,21 +1,26 @@
-
-img{
-    margin-left: 60px;
-    margin-top: 20px;
-    width: 70%;
-    max-height:125px;
-
+img {
+  margin-left: 60px;
+  margin-top: 20px;
+  width: 70%;
+  max-height: 125px;
 }
 
-.container{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    min-height: 20px;
-    max-height: 25px;
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  min-height: 20px;
+  max-height: 25px;
 }
 
-.custom-card{
-    margin-bottom: 60px;
+.custom-card {
+  margin-bottom: 60px;
+}
+
+.submit {
+  float: right;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
 }

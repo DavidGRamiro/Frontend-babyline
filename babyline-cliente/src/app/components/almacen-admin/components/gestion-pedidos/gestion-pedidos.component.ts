@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, type OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, Output, type OnInit } from '@angular/core';
 import { PrimeNgModule } from '../../../../utils/primeNG/primeNg.module';
 import { GestionPedidosGridComponent } from './gestion-pedidos-grid/gestion-pedidos-grid.component';
 import { PickListModule } from 'primeng/picklist';
@@ -15,12 +15,9 @@ import { ProductosService } from '../../../productos/services/productos.service'
 })
 export class GestionPedidosComponent implements OnInit {
   
-  private _productoService = inject(ProductosService)
-
+  @Output() evenRes : EventEmitter<any> = new EventEmitter<any>();
 
   public bDisplay : boolean = false;
-  public productos : any[] = []
-  public targetProductos : any[] = []
 
   public tiendas : any[] = [
     {name: 'Miravia', code: '1'},
@@ -36,21 +33,10 @@ export class GestionPedidosComponent implements OnInit {
   ]
   
   ngOnInit(): void {
-    this.getProductos();
   }
 
   addPedido() {
-    this.bDisplay = true;
+    this.evenRes.emit(true);
   }
 
-  getProductos(){
-    this._productoService.obtenerProductos().subscribe({
-      next: (productos : any) => {
-        this.productos = productos;
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    })
-  }
 }

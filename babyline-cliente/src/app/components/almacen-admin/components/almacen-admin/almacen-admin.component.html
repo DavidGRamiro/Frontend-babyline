@@ -1,87 +1,237 @@
+<div class="container">
+  <div class="custom-card">
+    <p-card
+      header="Movimientos"
+      styleClass="shadow-5"
+      subheader="Visualizacion de movimientos"
+      [style]="{ width: '280px', margin: '20px' }"
+    >
+      <ng-template pTemplate="header">
+        <img alt="Card" src="assets/svg/movimientos.svg" />
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+          <p-button
+            label="Ver movimientos"
+            class="w-full"
+            styleClass="w-full"
+            (onClick)="showMovimientos()"
+          />
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+  <div class="custom-card">
+    <p-card
+      header="Gestión de usuarios"
+      styleClass="shadow-5"
+      subheader="Mantenimiento de usuarios"
+      [style]="{ width: '280px' }"
+    >
+      <ng-template pTemplate="header">
+        <img alt="Card" class="mb-3" src="assets/svg/login.svg" />
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+          <p-button
+            label="Gestión"
+            class="w-full"
+            styleClass="w-full"
+            (onClick)="showGestionUsers()"
+          />
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+  <div class="custom-card">
+    <p-card
+      header="Gestión de pedidos"
+      styleClass="shadow-5"
+      subheader="Control de pedidos entrantes"
+      [style]="{ width: '280px' }"
+    >
+      <ng-template pTemplate="header">
+        <img alt="Card" src="assets/svg/pedidos.svg" />
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-2 mt-1">
+          <p-button
+            label="Gestión"
+            class="w-full"
+            styleClass="w-full"
+            (onClick)="showControlPedidos()"
+          />
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+  <div class="custom-card">
+    <p-card
+      header="Reportes"
+      styleClass="shadow-5"
+      subheader="Reportes de errores"
+      [style]="{ width: '280px' }"
+    >
+      <ng-template pTemplate="header">
+        <img alt="Card" src="assets/svg/reports.svg" />
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+          <p-button
+            label="Gestión"
+            class="w-full"
+            styleClass="w-full"
+            (onClick)="showErrors()"
+          />
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+  <div class="">
+    <p-card
+      header="Sincronizar bases de datos"
+      styleClass="shadow-5"
+      subheader="Sincronización con BBDD"
+      [style]="{ width: '280px' }"
+    >
+      <ng-template pTemplate="header">
+        <img alt="Card" src="assets/svg/sync.svg" />
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <div class="flex gap-2 mt-1">
+          <p-button
+            label="Gestión"
+            class="w-full"
+            styleClass="w-full"
+            (onClick)="syncBBDD()"
+          />
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</div>
 
-    <div class="container">
-
-        <div class="custom-card">
-            <p-card header="Movimientos" styleClass="shadow-5"  subheader="Visualizacion de movimientos" [style]="{ width: '280px', margin:'20px' }">
-                <ng-template pTemplate="header">
-                    <img alt="Card" src="assets/svg/movimientos.svg" />
-                </ng-template>
-                <ng-template pTemplate="footer">
-                    <div class="flex gap-3 mt-1">
-                        <p-button label="Ver movimientos" class="w-full" styleClass="w-full" (onClick)="showMovimientos()" />
-                    </div>
-                </ng-template>
-            </p-card>
-        </div>
-        <div class="custom-card">
-            <p-card header="Gestión de usuarios" styleClass="shadow-5" subheader="Mantenimiento de usuarios" [style]="{ width: '280px' }">
-                <ng-template pTemplate="header">
-                    <img alt="Card" class="mb-3" src="assets/svg/login.svg" />
-                </ng-template>
-                <ng-template pTemplate="footer">
-                    <div class="flex gap-3 mt-1">
-                        <p-button label="Gestión" class="w-full" styleClass="w-full" (onClick)="showGestionUsers() " />
-                    </div>
-                </ng-template>
-            </p-card>
-        </div>
-        <div class="custom-card">
-            <p-card header="Gestión de pedidos" styleClass="shadow-5" subheader="Control de pedidos entrantes" [style]="{ width: '280px'}">
-                <ng-template pTemplate="header">
-                    <img alt="Card" src="assets/svg/pedidos.svg" />
-                </ng-template>
-                <ng-template pTemplate="footer">
-                    <div class="flex gap-2 mt-1">
-                        <p-button label="Gestión" class="w-full" styleClass="w-full" (onClick)="showControlPedidos()"/>
-                    </div>
-                </ng-template>
-            </p-card>
-        </div>
-        <div class="custom-card">
-            <p-card header="Reportes" styleClass="shadow-5" subheader="Reportes de errores" [style]="{ width: '280px' }">
-                <ng-template pTemplate="header">
-                    <img alt="Card" src="assets/svg/reports.svg" />
-                </ng-template>
-                <ng-template pTemplate="footer">
-                    <div class="flex gap-3 mt-1">
-                        <p-button label="Gestión" class="w-full" styleClass="w-full" (onClick)="showErrors()"/>
-                    </div>
-                </ng-template>
-            </p-card>
-        </div>
-        <div class="">
-            <p-card header="Sincronizar bases de datos" styleClass="shadow-5" subheader="Sincronización con BBDD" [style]="{ width: '280px' }">
-                <ng-template pTemplate="header">
-                    <img alt="Card" src="assets/svg/sync.svg" />
-                </ng-template>
-                <ng-template pTemplate="footer">
-                    <div class="flex gap-2 mt-1">
-                        <p-button label="Gestión" class="w-full" styleClass="w-full" (onClick)="syncBBDD()" />
-                    </div>
-                </ng-template>
-            </p-card>
-        </div>
-    </div>
-
-
-<p-dialog header="{{titleForm}}" [modal]="true" [style]="{ width: '80%' }" maximizable="true" [(visible)]="bDisplay"  appendTo="body" (onHide)="closeAll()">
-    @if(showMov) {
-        <app-movimientos></app-movimientos>
-    }@else if(showControl){
-        <app-gestion-pedidos></app-gestion-pedidos>
-    }@else if(showLogError){
-        <app-error-log></app-error-log>
-    }@else if(showSync){
-        <app-sync></app-sync>
-    }@else{
-        <h1>Nada que mostrar</h1>
-    }
+<p-dialog
+  header="{{ titleForm }}"
+  [modal]="true"
+  [style]="{ width: '80%' }"
+  maximizable="true"
+  [(visible)]="bDisplay"
+  appendTo="body"
+  (onHide)="closeAll()"
+>
+  @if(showMov) {
+  <app-movimientos></app-movimientos>
+  }@else if(showControl){
+  <app-gestion-pedidos
+    (evenRes)="getEmitterGestion($event)"
+  ></app-gestion-pedidos>
+  }@else if(showLogError){
+  <app-error-log></app-error-log>
+  }@else if(showSync){
+  <app-sync></app-sync>
+  }@else{
+  <h1>Nada que mostrar</h1>
+  }
 </p-dialog>
 
-
-<p-dialog header="{{titleForm}}" [modal]="true" [style]="{ width: '55%' }" maximizable="true" [(visible)]="showGestion"  appendTo="body" (onHide)="closeAll()">
-    @if(showGestion) {
-        <app-users (eventRes)="getEmitterUser($event)"></app-users>
-    }
+<p-dialog
+  header="{{ titleForm }}"
+  [modal]="true"
+  [style]="{ width: '55%' }"
+  maximizable="true"
+  [(visible)]="showGestion"
+  appendTo="body"
+  (onHide)="closeAll()"
+>
+  @if(showGestion) {
+  <app-users (eventRes)="getEmitterUser($event)"></app-users>
+  }
 </p-dialog>
 <p-toast></p-toast>
+
+
+
+<!-- Dialog para dar de alta un nuevo pedido y todos sus items. -->
+<p-dialog
+  header="Crear un nuevo pedido"
+  [modal]="true"
+  [(visible)]="showAddpedido"
+  [style]="{ width: '80rem', height: '100%' }"
+  [maximizable]="true"
+>
+  <div class="m-5">
+    <form [formGroup]="formPedidos" >
+      <div class="formgroup-inline">
+        <div class="field">
+          <p-floatLabel>
+            <input pInputText id="cod_pedido" formControlName="cod_pedido" />
+            <label for="cod_pedido">Cód. Pedido</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="field">
+          <p-dropdown
+            formControlName="tienda"
+            [options]="tiendas"
+            optionLabel="name"
+            placeholder="Tienda"
+          />
+        </div>
+
+        <div class="field">
+          <p-dropdown
+            formControlName="prioridad"
+            [options]="prioridades"
+            optionLabel="name"
+            placeholder="Prioridad"
+          />
+        </div>
+      </div>
+
+      <h3>Seleccione los articulos a incluir en el pedido</h3>
+
+      <div class="card">
+        <p-pickList
+          [source]="productos"
+          [target]="targetProductos"
+          sourceHeader="Disponibles"
+          targetHeader="Seleccionados"
+          [dragdrop]="true"
+          [responsive]="true"
+          [sourceStyle]="{ height: '20rem' }"
+          [targetStyle]="{ height: '20rem' }"
+          filterBy="denominacion_producto"
+          sourceFilterPlaceholder="Buscar por nombre"
+          targetFilterPlaceholder="Buscar por nombre"
+          breakpoint="990px"
+          [trackBy]="trackById">
+
+        >
+          <ng-template let-producto pTemplate="item">
+            <div class="flex flex-wrap p-2 align-items-center gap-3">
+              <div class="flex-1 flex flex-column gap-2">
+                <span class="font-bold">
+                  {{ producto.denominacion_producto }}
+                </span>
+                <div class="flex align-products-center gap-2">
+                  <i class="pi pi-tag text-sm"></i>
+                  <span>
+                    {{ producto.fabricante }}
+                  </span>
+                </div>
+              </div>
+              <span class="font-bold text-900">
+                {{  producto.precio_venta + "€" }}
+              </span>
+            </div>
+          </ng-template>
+        </p-pickList>
+      </div>
+    </form>
+    <div class="submit mb-5">
+      <p-button label="Guardar" severity="success" (onClick)="savePedido()"/>
+    </div>
+  </div>
+
+</p-dialog>
