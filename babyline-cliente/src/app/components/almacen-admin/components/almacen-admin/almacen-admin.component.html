@@ -164,19 +164,20 @@
     <form [formGroup]="formPedidos" >
       <div class="formgroup-inline">
         <div class="field">
-          <p-floatLabel>
-            <input pInputText id="cod_pedido" formControlName="cod_pedido" />
-            <label for="cod_pedido">Cód. Pedido</label>
-          </p-floatLabel>
-        </div>
-
-        <div class="field">
           <p-dropdown
             formControlName="tienda"
             [options]="tiendas"
             optionLabel="name"
             placeholder="Tienda"
+            (onChange)="onTiendaClick($event)"
           />
+        </div>
+
+        <div class="field">
+          <p-floatLabel>
+            <input #codPedidoInput pInputText id="cod_pedido" [disabled]="botonDisabled" [(value)]="sCodPedido"/>
+            <label for="cod_pedido">Cód. Pedido</label>
+          </p-floatLabel>
         </div>
 
         <div class="field">
@@ -185,53 +186,65 @@
             [options]="prioridades"
             optionLabel="name"
             placeholder="Prioridad"
+            [disabled]="true"
           />
         </div>
       </div>
 
       <h3>Seleccione los articulos a incluir en el pedido</h3>
 
-      <div class="card">
-        <p-pickList
-          [source]="productos"
-          [target]="targetProductos"
-          sourceHeader="Disponibles"
-          targetHeader="Seleccionados"
-          [dragdrop]="true"
-          [responsive]="true"
-          [sourceStyle]="{ height: '20rem' }"
-          [targetStyle]="{ height: '20rem' }"
-          filterBy="denominacion_producto"
-          sourceFilterPlaceholder="Buscar por nombre"
-          targetFilterPlaceholder="Buscar por nombre"
-          breakpoint="990px"
-          [trackBy]="trackById">
-
-        >
-          <ng-template let-producto pTemplate="item">
-            <div class="flex flex-wrap p-2 align-items-center gap-3">
-              <div class="flex-1 flex flex-column gap-2">
-                <span class="font-bold">
-                  {{ producto.denominacion_producto }}
-                </span>
-                <div class="flex align-products-center gap-2">
-                  <i class="pi pi-tag text-sm"></i>
-                  <span>
-                    {{ producto.fabricante }}
-                  </span>
+      <div class="seleccion-item">
+        <p-multiSelect 
+          [options]="productos" 
+          placeholder="Selección de artículo"
+          optionLabel="denominacion_producto" 
+          [filter]="true"
+          [style]="{width:'400px'}"
+          lazy="true"
+          [resetFilterOnHide]="true"
+          filterValue=""
+          [showClear]="true"
+          [autocomplete]="'on'"
+          scrollHeight="300px"
+          display="chip"
+          formControlName="selectedProducts"
+          >
+            <ng-template let-item pTemplate="group">
+                <div class="flex align-items-center">
+                    <span>{{ item.denominacion_producto }}</span>
                 </div>
-              </div>
-              <span class="font-bold text-900">
-                {{  producto.precio_venta + "€" }}
-              </span>
-            </div>
-          </ng-template>
-        </p-pickList>
+            </ng-template>
+        </p-multiSelect>
+
       </div>
     </form>
     <div class="submit mb-5">
-      <p-button label="Guardar" severity="success" (onClick)="savePedido()"/>
+      <p-button icon="pi pi-eye" rounded="true"  pTooltip="Previsualizar pedido" tooltipPosition="left" severity="primary" (onClick)="previewOrder()"/>
+      <p-button icon="pi pi-euro" class="ml-1" rounded="true"  pTooltip="Añadir pedido" tooltipPosition="left" severity="success" (onClick)="savePedido()"/>
     </div>
   </div>
+
+  @if (bDisplayTable) {
+    <div class="table">
+        <p-table [value]="productosOrder" [tableStyle]="{ 'min-width': '50rem' }" [styleClass]="'p-datatable-sm'">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Producto</th>
+                    <th>Codigo</th>
+                    <th>Fabricante</th>
+                    <th>Cantidad</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td>{{ product.denominacion_producto }}</td>
+                    <td>{{ product.ean }}</td>
+                    <td>{{ product.fabricante }}</td>
+                    <td>{{ product.cantidad }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+  }
 
 </p-dialog>

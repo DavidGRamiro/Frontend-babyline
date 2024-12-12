@@ -12,8 +12,8 @@ export class ProductosService {
   private url = `http://localhost:8000/productos/`;
 
   // Obtenemos todos los productos disponibles.
-  obtenerProductos(){
-    return this._http.get(this.url);
+  obtenerProductos(params : {} = {}){
+    return this._http.get(this.url, { params });
   }
 
   // Damos de alta un nuevo producto

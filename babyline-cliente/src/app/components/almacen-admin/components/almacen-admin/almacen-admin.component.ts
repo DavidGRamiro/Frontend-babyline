@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, type OnInit } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild, type OnInit } from '@angular/core';
 import { PrimeNgModule } from '../../../../utils/primeNG/primeNg.module';
 import { ErrorLogComponent } from '../error-log/error-log.component';
 import { GestionPedidosComponent } from '../gestion-pedidos/gestion-pedidos.component';
@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 import { PickListModule } from 'primeng/picklist';
 import { ProductosService } from '../../../productos/services/productos.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { InputText } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-almacen-admin',
@@ -31,6 +32,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   providers: [MessageService],
 })
 export class AlmacenAdminComponent implements OnInit {
+
+  @ViewChild('codPedidoInput') codPedidoComponent! : ElementRef
   
   // Servicios
   private _productoService = inject(ProductosService)
@@ -43,10 +46,16 @@ export class AlmacenAdminComponent implements OnInit {
   public showSync: boolean = false;
   public bDisplay: boolean = false;
   public showAddpedido : boolean = false;
+  public botonDisabled:boolean = true;
+  public bDisplayTable : boolean = false;
+
+  public sCodPedido : string = ''
+
 
   // Variables de control de datos
   public productos : any[] = []
-  public targetProductos : any[] = []
+  public  : any[] = []
+  public productosOrder : any = []
 
   // Manejo del titulo del modal dependiendo que componente abra.
   public titleForm: string = '';
@@ -54,9 +63,10 @@ export class AlmacenAdminComponent implements OnInit {
 
   // Formulario
   public formPedidos = new FormGroup({
-    cod_pedido: new FormControl('', Validators.required),
+    cod_pedido: new FormControl(Validators.required),
     tienda: new FormControl('', Validators.required),
     prioridad: new FormControl('', Validators.required),
+    selectedProducts: new FormControl([], Validators.required)
   });
 
 
@@ -132,23 +142,62 @@ export class AlmacenAdminComponent implements OnInit {
     this.showAddpedido = event;
   }
 
-  // Cargamos los datos para el formulario de gestion de pedidos.
+  // Cargamos los datos para el formulario de gestion de pedidos. Lo filtramos por aquellos que haya stock
   getProductos(){
-    this._productoService.obtenerProductos().subscribe({
+
+    let params = { stock__gt: 0}
+
+    this._productoService.obtenerProductos(params).subscribe({
       next: (productos : any) => {
         this.productos = productos;
+        console.log(productos)
       },
-      error: (error) => { }
+      error: (error) => { 
+        console.log(error)
+      }
     })
   }
 
   // Método submit para guardar un pedido y mandamos al componente hijo para que haga su logica.
   savePedido(){
-    console.log(' Hola')
-    console.log(this.targetProductos)
+    console.log(this.formPedidos)
   }
 
+  // Funcion para renderizar los items buscados en el selector
   trackById(index: number, item: any): number {
     return item.id;
+  }
+  
+  // Cuando se selecciona una tienda del selector, creamos un numero de pedido aleatorio
+  onTiendaClick(event:any){
+    if(event.value){      
+      switch(event.value.name){
+
+        case 'Miravia':
+          this.sCodPedido = 'MIR-'
+          break;
+        case 'Carrefour':
+          this.sCodPedido = 'CRF-'
+          break;
+        case 'Amazon':
+          this.sCodPedido = 'AMZ-'
+          break;
+        case 'Babyline':
+          this.sCodPedido = ' BAB-'
+          break;
+      }
+
+      this.sCodPedido += Math.floor(Math.random() * 10000).toString()
+    }
+  }
+
+  // Mostramos la tabla de previsualizacion del pedido creado
+  previewOrder(){
+    this.bDisplayTable = true;
+    if(this.formPedidos.value.selectedProducts){
+      this.productosOrder = this.formPedidos.value.selectedProducts.map((item : any) => {
+        item.cantidad = 1; return item
+      })
+    }
   }
 }
