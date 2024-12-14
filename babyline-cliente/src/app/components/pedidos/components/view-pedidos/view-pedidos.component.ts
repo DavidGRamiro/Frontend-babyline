@@ -59,6 +59,11 @@ export class ViewPedidosComponent implements OnInit {
       case '3':
         denom_tienda = 'Miravia'
         break;
+      case '4':
+        denom_tienda = 'Carrefour'
+        break;
+      case '5':
+        denom_tienda = 'Babyline'
     }
     return denom_tienda
   }

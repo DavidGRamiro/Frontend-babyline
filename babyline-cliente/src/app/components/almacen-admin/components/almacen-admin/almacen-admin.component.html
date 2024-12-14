@@ -203,11 +203,11 @@
           lazy="true"
           [resetFilterOnHide]="true"
           filterValue=""
-          [showClear]="true"
           [autocomplete]="'on'"
           scrollHeight="300px"
           display="chip"
           formControlName="selectedProducts"
+          (onChange)="onChangeSelector($event)"
           >
             <ng-template let-item pTemplate="group">
                 <div class="flex align-items-center">
@@ -218,33 +218,63 @@
 
       </div>
     </form>
-    <div class="submit mb-5">
-      <p-button icon="pi pi-eye" rounded="true"  pTooltip="Previsualizar pedido" tooltipPosition="left" severity="primary" (onClick)="previewOrder()"/>
-      <p-button icon="pi pi-euro" class="ml-1" rounded="true"  pTooltip="Añadir pedido" tooltipPosition="left" severity="success" (onClick)="savePedido()"/>
-    </div>
   </div>
 
   @if (bDisplayTable) {
     <div class="table">
-        <p-table [value]="productosOrder" [tableStyle]="{ 'min-width': '50rem' }" [styleClass]="'p-datatable-sm'">
+        <p-table [value]="productosOrder" 
+                [styleClass]="'p-datatable-sm p-datatable-striped'"
+                [resizableColumns]="true" 
+                [scrollable]="true" 
+                scrollHeight="400px"
+                editMode="cell"
+                columnResizeMode="expand" >
             <ng-template pTemplate="header">
                 <tr>
                     <th>Producto</th>
                     <th>Codigo</th>
                     <th>Fabricante</th>
                     <th>Cantidad</th>
+                    <th style="width:20%"></th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-product>
-                <tr>
-                    <td>{{ product.denominacion_producto }}</td>
-                    <td>{{ product.ean }}</td>
-                    <td>{{ product.fabricante }}</td>
-                    <td>{{ product.cantidad }}</td>
+            <ng-template pTemplate="body" let-editing="editing" let-product  let-ri="rowIndex">
+              <tr [pEditableRow]="product">
+                  <td>{{ product.denominacion_producto }}</td>
+                  <td>{{ product.ean }}</td>
+                  <td>{{ product.fabricante }}</td>
+                  <td [pEditableColumn]="product.cantidad" pEditableColumnField="cantidad">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input 
+                                pInputText type="text" 
+                                [(ngModel)]="product.cantidad" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ product.cantidad  }}
+                        </ng-template>
+                    </p-cellEditor>
+                  </td>
+                    <div class="flex align-items-center justify-content-center gap-2">
+                      <button 
+                          *ngIf="!editing" 
+                          pButton
+                          pRipple 
+                          type="button" 
+                          icon="pi pi-times" 
+                          (click)="eliminarFila(ri)" 
+                          class="p-button-rounded p-button-text p-button-danger">
+                      </button>
+                    </div>
                 </tr>
             </ng-template>
         </p-table>
     </div>
+
+    <div class="submit">
+      <p-button icon="pi pi-euro" class="ml-1" rounded="true"  pTooltip="Añadir pedido" tooltipPosition="left" severity="success" (onClick)="savePedido()"/>
+    </div>
   }
 
 </p-dialog>
+<p-toast></p-toast>
