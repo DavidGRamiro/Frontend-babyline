@@ -230,8 +230,9 @@ export class AlmacenAdminComponent implements OnInit {
 
     this._pedidoService.createPedido(this.formPedidos.value).subscribe({
       next : (data: any) => {
-        console.log('Create pedido',data)
         this._msgService.add({ severity: 'success', detail: 'Creado !', summary: 'El pedido ha sido creado con éxito'})
+        this.showAddpedido = false
+        
 
       },
       error: (err:any) => {
