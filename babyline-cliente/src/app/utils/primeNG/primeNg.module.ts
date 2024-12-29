@@ -23,6 +23,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { BadgeModule } from 'primeng/badge';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TooltipModule } from 'primeng/tooltip';
+import { DataViewModule } from 'primeng/dataview';
 @NgModule({
   declarations: [],
   imports: [
@@ -49,7 +50,8 @@ import { TooltipModule } from 'primeng/tooltip';
     AvatarGroupModule,
     BadgeModule,
     ConfirmPopupModule,
-    TooltipModule
+    TooltipModule,
+    DataViewModule
     
   ],
   exports: [
@@ -76,6 +78,7 @@ import { TooltipModule } from 'primeng/tooltip';
     BadgeModule,
     ConfirmPopupModule,
     TooltipModule,
+    DataViewModule
 
   ]
 })

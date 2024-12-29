@@ -3,12 +3,13 @@ import { Component, inject, type OnInit } from '@angular/core';
 import { PrimeNgModule } from '../../../../utils/primeNG/primeNg.module';
 import { PedidosService } from '../../services/pedidos.service';
 import { MessageService } from 'primeng/api';
+import { PedidoOrderComponent } from '../pedido-order/pedido-order.component';
 
 @Component({
   selector: 'app-view-pedidos',
   standalone: true,
   imports: [
-    CommonModule, PrimeNgModule
+    CommonModule, PrimeNgModule, PedidoOrderComponent
   ],
   templateUrl: './view-pedidos.component.html',
   styleUrl: './view-pedidos.component.css',
@@ -20,7 +21,9 @@ export class ViewPedidosComponent implements OnInit {
   private _pedidoService = inject(PedidosService)
   private _msgService = inject(MessageService)
 
-  public pedidos : any[] = []
+  public pedidos : any[] = [];
+  public productosPedido : [] = [];
+  public pedidoEmpezado : boolean = false;
 
   ngOnInit(): void {
     this.getPedidos()
@@ -96,24 +99,25 @@ export class ViewPedidosComponent implements OnInit {
     }
   }
 
-  // Función que asoaciamos cuando empezamos un pedido. Mostraremos el mensaje de que el pedido ha sido iniciado,
-  // Actualizaremos la base de datos con el estado del pedido, y redigiremos a una pantalla de creación de pedido
+  // Función que asoaciamos cuando empezamos un pedido
   empezarPedido(pedido : any){
+    this.pedidoEmpezado = true;
+    this.getDetallePedidos(pedido)
+    
+  }
 
-    let data = {...pedido}
-    data.estado = 'En curso'
-
-    this._pedidoService.updatePedido(pedido.id, data).subscribe({
-      next: (data: any) => {
-        console.log(data)
-        this._msgService.add({ severity: 'info', detail: 'Pedido en curso !', summary: '' })
-        this.getPedidos()
-        
+  // Una vez seleccionado el pedido se obtienen los productos que lo contienen
+  getDetallePedidos(pedido:any){
+    let params = { id_fk_pedido : pedido.id}
+    this._pedidoService.getDetallePedido(params).subscribe({
+      next : (data:any) =>{
+        this.productosPedido = data
       },
-      error: (error: any) => {
-        console.log(error)
+      error : (err: any) => {
+        this._msgService.add({})
       }
     })
+
   }
 
 }
