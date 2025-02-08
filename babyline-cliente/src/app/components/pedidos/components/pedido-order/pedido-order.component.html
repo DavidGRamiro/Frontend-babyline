@@ -6,7 +6,7 @@
         <div
           class="col-12"
           *ngFor="let item of products; let first = first"
-          class="col-12"
+          [ngClass]="{ 'border-top-1 surface-border': !first, 'no-stock': item.producto.stock === 0 }"
         >
           <div
             class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3"
@@ -31,21 +31,67 @@
                     item.producto.denominacion_producto
                   }}</span>
                 </div>
+                <div>
+                  <span class="font-medium text-secondary font-bold text-sm">
+                    Código interno {{item.producto.ean}}</span>
+                </div>
+                <div>
+                  <span class="font-medium text-secondary font-bold text-sm">
+                    Stock disponible {{item.producto.stock}}</span>
+                </div>
                 <!-- PONER LA UBICACION DEL PRODUCTO -->
-              
+                @if (item.producto.ubicacion) {
+                  <div>
+                    <span class="font-medium text-secondary text-sm"> Ubicacion: 
+                      Zona {{ item.producto.ubicacion.zona}} -
+                      Pasillo {{ item.producto.ubicacion.pasillo}} -
+                      Altura {{ item.producto.ubicacion.altura }}
+                    </span>
+                  </div>
+                }
               </div>
-              <div class="flex flex-column md:align-items-end gap-5">
-                <span class="text-xl font-semibold text-900">{{
-                  item.cantidad
-                }}</span>
+              <div class="flex flex-column md:align-items-end gap-2">
+                <span class="text-xl text-600">
+                  Cantidad: {{ item.cantidad }}</span>
+                  @if (item.cantidad > item.producto.stock) {
+                    <p-inputNumber 
+                        [inputStyle]="{'width':'50px'}"
+                        [showButtons]="true" 
+                        [(ngModel)]="inputValue"
+                        buttonLayout="horizontal" 
+                        inputId="horizontal" 
+                        spinnerMode="horizontal" 
+                        [step]="1"
+                        [disabled]="addedProducts[item.id_fk_producto]"
+                        [max]="item.producto.stock"
+                        incrementButtonIcon="pi pi-plus" 
+                        decrementButtonIcon="pi pi-minus"/>
+                  }
+                  
                 <div class="flex flex-row-reverse md:flex-row gap-2">
-                  <p-button icon="pi pi-heart" [outlined]="true" />
-                  <p-button
+                  @if (item.producto.stock === 0 || item.cantidad > item.producto.stock) {
+                    <p-button pTooltip="No existe stock suficiente. Informar del error al administrador." showDelay="1000" hideDelay="300" 
+                    icon="pi pi-info" [outlined]="true" severity="danger"
+                    [disabled]="productoError.includes(item.id_fk_producto)"
+                    (onClick)="errorOrder(item)"/>
+                  }
+                  @if (!addedProducts[item.id_fk_producto]) {
+                    <p-button
                     icon="pi pi-shopping-cart"
                     class="flex-auto md:flex-initial white-space-nowrap"
-                    label="Buy Now"
-                    [disabled]="item.inventoryStatus === 'OUTOFSTOCK'"
+                    label="Añadir"
+                    [disabled]="item.producto.stock == 0"
+                    (onClick)="addProductOrder(item)"
                   />
+                  }
+                  @if (addedProducts[item.id_fk_producto]) {
+                    <p-button
+                    icon="pi pi-check" [rounded]="true"
+                    severity="success"
+                    class="flex-auto md:flex-initial white-space-nowrap"
+                    disabled="true"
+                  />
+                  }
                 </div>
               </div>
             </div>
@@ -53,7 +99,17 @@
         </div>
       </div>
     </ng-template>
+
   </p-dataView>
+
 </div>
 
+<p-button icon="pi pi-check" label="Finalizar pedido" 
+          [rounded]="true" 
+          severity="success" class="pedido-form" (onClick)="procesarPedido()"/>
+
 }
+
+
+<p-toast></p-toast>
+<p-confirmDialog key="positionDialog"  position="bottom" />

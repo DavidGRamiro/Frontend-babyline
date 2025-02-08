@@ -23,10 +23,15 @@ export class ProductosService {
 
   // Editamos un producto en especifico
   editarProducto( id_producto:number, producto:any){
-    
     const url = `${this.url}${id_producto}/`;
     return this._http.put(url, producto);
   }
+
+  // Editamos un producto de forma parcial
+  editarProductoPartial( id_producto:number, body:any){
+      const url = `${this.url}${id_producto}/`;
+      return this._http.patch(url, body);
+    }
 
   // Eliminamos un producto definitivamente.
   eliminarProducto(id:number){

@@ -51,7 +51,9 @@ import { DataViewModule } from 'primeng/dataview';
     BadgeModule,
     ConfirmPopupModule,
     TooltipModule,
-    DataViewModule
+    DataViewModule,
+    ConfirmDialogModule,
+    ConfirmPopupModule,
     
   ],
   exports: [
@@ -78,7 +80,9 @@ import { DataViewModule } from 'primeng/dataview';
     BadgeModule,
     ConfirmPopupModule,
     TooltipModule,
-    DataViewModule
+    DataViewModule,
+    ConfirmDialogModule,
+    ConfirmPopupModule,
 
   ]
 })
