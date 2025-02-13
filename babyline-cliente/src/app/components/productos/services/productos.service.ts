@@ -28,7 +28,7 @@ export class ProductosService {
   }
 
   // Editamos un producto de forma parcial
-  editarProductoPartial( id_producto:number, body:any){
+editarProductoPartial(id_producto:number, body : any){
       const url = `${this.url}${id_producto}/`;
       return this._http.patch(url, body);
     }

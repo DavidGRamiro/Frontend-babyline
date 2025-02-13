@@ -57,7 +57,7 @@
                     <p-inputNumber 
                         [inputStyle]="{'width':'50px'}"
                         [showButtons]="true" 
-                        [(ngModel)]="inputValue"
+                        [(ngModel)]="inputValue[item.id_fk_producto]"
                         buttonLayout="horizontal" 
                         inputId="horizontal" 
                         spinnerMode="horizontal" 
@@ -104,9 +104,20 @@
 
 </div>
 
-<p-button icon="pi pi-check" label="Finalizar pedido" 
-          [rounded]="true" 
-          severity="success" class="pedido-form" (onClick)="procesarPedido()"/>
+<div class="pedido-form">
+  <p-button icon="pi pi-times" 
+  class="mr-2"
+            label="Cancelar" 
+            severity="secondary"
+            [rounded]="true" 
+            (onClick)="cancel()"/>
+
+  <p-button icon="pi pi-check" 
+            label="Finalizar pedido" 
+            [rounded]="true" 
+            severity="success"
+            (onClick)="procesarPedido()"/>
+</div>
 
 }
 

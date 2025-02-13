@@ -117,7 +117,14 @@ export class ViewPedidosComponent implements OnInit {
         this._msgService.add({})
       }
     })
+  }
 
+  //Recibimos el emitter de gestion del pedido.
+  getEmitterOrder(event : Event){
+    if(event){
+      this.pedidoEmpezado = false;
+      this.getPedidos()
+    }
   }
 
 }

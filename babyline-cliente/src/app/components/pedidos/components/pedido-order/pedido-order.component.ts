@@ -1,12 +1,10 @@
-import { Component, inject, input, Input, type OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, input, Input, Output, type OnInit } from '@angular/core';
 import { PrimeNgModule } from '../../../../utils/primeNG/primeNg.module';
 import { CommonModule } from '@angular/common';
 import { ProductosService } from '../../../productos/services/productos.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { PedidosService } from '../../services/pedidos.service';
 import { FormsModule } from '@angular/forms';
-import { GestionPedidosGridComponent } from '../../../almacen-admin/components/gestion-pedidos/gestion-pedidos-grid/gestion-pedidos-grid.component';
-import { producerIncrementEpoch } from '@angular/core/primitives/signals';
 
 interface Producto {
   cantidad : number,
@@ -30,6 +28,7 @@ interface Producto {
 })
 export class PedidoOrderComponent implements OnInit {
 
+  @Output() eventRes : EventEmitter<any> = new EventEmitter<any>
   @Input() set order (data : any[]){
     if(data.length > 0){
       this.productos = data
@@ -47,7 +46,7 @@ export class PedidoOrderComponent implements OnInit {
   public listOrder : any[] = []
   public productoError : any[] = [];
   public finishOrder : boolean = false
-  public inputValue  = null;
+  public inputValue: { [key: number]: number } = {};
   public missingProducts : any[] = [];
 
 
@@ -83,9 +82,10 @@ export class PedidoOrderComponent implements OnInit {
         cantidad: producto.cantidad
       })
     }else{
+      const cantidad = this.inputValue[producto.id_fk_producto]
       this.listOrder.push({
         producto: producto.id_fk_producto,
-        cantidad: this.inputValue
+        cantidad: cantidad
       })
     }
   }
@@ -103,17 +103,10 @@ export class PedidoOrderComponent implements OnInit {
       return producto.cantidad > producto.producto.stock
     })
 
-    if(notEnought && this.productoError.length == 0){
-      this._msgService.add({
-        severity: 'error', summary: 'Registre la incidencia', detail:'Para terminar de procesar el pedido, es necesario que notifique el porducto incompleto.', life:3000
-      })
-      return
-    }
 
-    if (allAdded && notEnought.length == 0) {
-      this.finishOrder = true
-      this._msgService.add({ severity: 'info', detail:'', summary:'Pedido finalizado'})
-    } else if (hasErrors || notEnought.length > 0) {
+    if (allAdded) {
+      this.finish()
+    } else if (hasErrors) {
       this._confirm.confirm({
         message: 'Existen productos que no se añadido al pedido.' +
         '¿Deseas continuar?',
@@ -134,14 +127,18 @@ export class PedidoOrderComponent implements OnInit {
     }
   }
 
+  // Función que termina de porcesar el pedido.
   finish(){
+    let finalizado : boolean = false;
     // Se recorre toda la lista de los items que se han podido añadir al pedido.
     this.listOrder.forEach(element => {
-      this._productoService.editarProductoPartial(element.producto, element).subscribe({
+      console.log(element)
+      this._productoService.editarProductoPartial(element.producto, element.cantidad).subscribe({
         next :(data: any) => {
-          console.log('editado')
+          finalizado = true;
         },
         error : (err: any) => {
+          finalizado = false;
         }
       })
     });
@@ -157,17 +154,27 @@ export class PedidoOrderComponent implements OnInit {
     this.missingProducts ? Object.assign(data, faltantes) : null
 
     // Actualizacion del pedido.
-    this._pedidoService.updatePedido(id_pedido, data).subscribe({
-      next: (data:any)=>{
-        console.log(data)
-      },
-      error : (err: any)=>{
-        console.log(err)
-      }
-    })
+    // Si los productos han sido actualizados y se han restado el stock, procedemos a actualizar el pedido
+    if(finalizado){
+      this._pedidoService.updatePedido(id_pedido, data).subscribe({
+        next: (data:any)=>{
+          this._msgService.add({severity: 'success', detail: 'Pedido finalizado', summary: 'Terminado'})
+          this.eventRes.emit('cancel')
+        },
+        error : (err: any)=>{
+          this._msgService.add({severity: 'error', detail: 'Ha ocurrido un error al terminar de procesar el estado del pedido', summary: 'Error interno'})
+        }
+      })
+    }else{
+      this._msgService.add({severity: 'error', detail: 'Ha ocurrido un error al terminar de actualizar el stock de los productos.', summary: 'Error interno'})
 
+    }
 
+  }
 
+  // Botón cancelar para cerrar el procesamiento del pedido
+  cancel(){
+    this.eventRes.emit('close')
   }
 
 }
