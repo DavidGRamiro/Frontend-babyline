@@ -136,7 +136,6 @@ export class GestionPedidosGridComponent implements OnInit {
       next: (data: any) => {
         this.messageService.add({ severity: 'success', summary: 'Pedido asignado', detail: 'El pedido se ha asignado correctamente', life: 3000 });
         this.getPedidos()
-        console.log(this.products)
         this.pedidoAsignado = true;
       },
       error: (error: any) => {

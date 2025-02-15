@@ -12,7 +12,7 @@ export class PedidosService {
   private urlDetalle = 'http://localhost:8000/pedido-detalle'
 
   // Obtenemos los pedidos que tenemos en el momento.
-  getPedidos( params : {}){
+  getPedidos( params : {} = {}){
     return this._http.get(this._url, { params })
   }
 

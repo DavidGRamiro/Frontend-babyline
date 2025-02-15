@@ -5,6 +5,7 @@ import { ProductosService } from '../../../productos/services/productos.service'
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { PedidosService } from '../../services/pedidos.service';
 import { FormsModule } from '@angular/forms';
+import { producerIncrementEpoch } from '@angular/core/primitives/signals';
 
 interface Producto {
   cantidad : number,
@@ -76,16 +77,23 @@ export class PedidoOrderComponent implements OnInit {
       }
     })
 
-    if(this.inputValue === null){
-      this.listOrder.push({
-        producto: producto.id_fk_producto,
-        cantidad: producto.cantidad
-      })
-    }else{
-      const cantidad = this.inputValue[producto.id_fk_producto]
+    if(producto.producto.stock > producto.cantidad && 
+      typeof this.inputValue === 'number' && 
+      this.inputValue === null){
+        this.listOrder.push({
+          producto: producto.id_fk_producto,
+          cantidad: producto.cantidad
+        })
+    }else if(producto.producto.stock > producto.cantidad && typeof this.inputValue === 'number'){
+      const cantidad = this.inputValue[producto.cantidad]
       this.listOrder.push({
         producto: producto.id_fk_producto,
         cantidad: cantidad
+      })
+    }else{
+      this.listOrder.push({
+        producto: producto.id_fk_producto,
+        cantidad: producto.cantidad
       })
     }
   }
@@ -100,7 +108,6 @@ export class PedidoOrderComponent implements OnInit {
           cantidad: producto.cantidad - producto.producto.stock
         })
       }
-      return producto.cantidad > producto.producto.stock
     })
 
 
@@ -128,21 +135,21 @@ export class PedidoOrderComponent implements OnInit {
   }
 
   // Función que termina de porcesar el pedido.
-  finish(){
+  async finish(){
     let finalizado : boolean = false;
     // Se recorre toda la lista de los items que se han podido añadir al pedido.
-    this.listOrder.forEach(element => {
-      console.log(element)
-      this._productoService.editarProductoPartial(element.producto, element.cantidad).subscribe({
-        next :(data: any) => {
+    const promises = this.listOrder.map(element => {
+      return this._productoService.editarProductoPartial(element.producto, element.cantidad).toPromise()
+        .then((data: any) => {
           finalizado = true;
-        },
-        error : (err: any) => {
+        })
+        .catch((err: any) => {
           finalizado = false;
-        }
-      })
+        });
     });
 
+    // Esperar a que todas las promesas se completen
+    await Promise.all(promises);
     // Actualiamos el estado del pedido.
     const id_pedido = this.productos[0].id_fk_pedido
     let data = {
