@@ -19,7 +19,7 @@
           {{ rowData[col.field] }}
         </td>
         <td><p-tag [value]="rowData.estado" [severity]="getEstado(rowData.estado)" /></td>
-        @if(rowData.estado == 'Sin empezar'){
+        @if(rowData.estado == 'Sin empezar' && rowData.id_fk_usuario === null){
           <td>
             <button 
                 type="button" 
@@ -29,6 +29,10 @@
                 class="p-button-rounded p-button-text"
                 (click)="confirm($event,rowData)">
             </button>
+          </td>
+        }@else {
+          <td>
+            <p-tag value="Asignado" severity="success"></p-tag>
           </td>
         }
         
@@ -47,7 +51,7 @@
         <p-dropdown 
           [options]="usuarios" 
           [(ngModel)]="usuarioSeleccionado" 
-          optionLabel="name" 
+          optionLabel="nombre" 
           [style]="{'width': '100%'}"
           placeholder="Seleccione un usuario" />
       </div>

@@ -123,8 +123,7 @@
   @if(showMov) {
   <app-movimientos></app-movimientos>
   }@else if(showControl){
-  <app-gestion-pedidos
-    (evenRes)="getEmitterGestion($event)"
+  <app-gestion-pedidos [refresh]="refreshPedidos"  (evenRes)="getEmitterGestion($event)"
   ></app-gestion-pedidos>
   }@else if(showLogError){
   <app-error-log></app-error-log>

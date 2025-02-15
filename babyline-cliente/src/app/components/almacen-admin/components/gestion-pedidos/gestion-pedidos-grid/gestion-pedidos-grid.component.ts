@@ -26,6 +26,9 @@ interface Column {
 export class GestionPedidosGridComponent implements OnInit {
 
   @Input() tienda : string = '';
+  @Input() set refresh(_refrescar : boolean) {
+    _refrescar ? this.getPedidos() : null 
+  }
 
   private _pedidoService = inject(PedidosService);
   private webSocketService = inject(SocketService);
@@ -34,11 +37,14 @@ export class GestionPedidosGridComponent implements OnInit {
   public cols!: Column[];
   public products!: any[];
   public usuarios: any[] = []
+  public users : any[] = []
+  public pedidoAsignado : boolean = false;
 
-  public usuarioSeleccionado: any | undefined;
+  public usuarioSeleccionado: any = null;
 
   ngOnInit(): void {
     this.getPedidos()
+    this.getUsers()
   }
 
   constructor(private confirmationService: ConfirmationService,
@@ -52,20 +58,17 @@ export class GestionPedidosGridComponent implements OnInit {
   }
 
   async getPedidos() {
-    await this.getUsers()
 
     let params = { tienda : this.tienda }
     this._pedidoService.getPedidos(params).subscribe(
       (data: any) => {
         this.products = data
-        
       },
-      error => {
-        console.error(error)
-      }
+      error => {}
     )
   }
 
+  // Obtenemos el estado del pedido.
   getEstado(estado : string){
     switch (estado) {
       case 'En curso':
@@ -107,25 +110,34 @@ export class GestionPedidosGridComponent implements OnInit {
   async getUsers(){
     try {
       const users = await firstValueFrom(this._userService.getUsers())  
-      users.forEach((user: any) => {
-        this.usuarios?.push({ name: user.nombre, value: user.id })
-      });
+      this.usuarios = this.removeDuplicates(users);
     }
     catch (error) {
-      console.error(error)
     }
   }
 
+
+  removeDuplicates(users: any[]): any[] {
+    const uniqueUsers = new Set();
+    return users.filter(user => {
+      const isDuplicate = uniqueUsers.has(user.id);
+      uniqueUsers.add(user.nombre);
+      return !isDuplicate;
+    });
+  }
+
+
   // Método que asignamos un pedido a un usuario
   asignarPedidoUsuario( pedido : any){
-    console.log(pedido)
     let data = {...pedido}
-    data.id_fk_usuario = this.usuarioSeleccionado.value
+    data.id_fk_usuario= this.usuarioSeleccionado.id
     
     this._pedidoService.updatePedido(pedido.id, data).subscribe({
       next: (data: any) => {
         this.messageService.add({ severity: 'success', summary: 'Pedido asignado', detail: 'El pedido se ha asignado correctamente', life: 3000 });
         this.getPedidos()
+        console.log(this.products)
+        this.pedidoAsignado = true;
       },
       error: (error: any) => {
         console.error(error)

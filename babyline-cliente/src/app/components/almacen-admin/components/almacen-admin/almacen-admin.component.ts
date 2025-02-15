@@ -52,7 +52,7 @@ export class AlmacenAdminComponent implements OnInit {
   public bDisplayTable : boolean = false;
 
   public sCodPedido : string = ''
-
+  public refreshPedidos : boolean = false; 
 
   // Variables de control de datos
   public productos : any[] = []
@@ -227,19 +227,21 @@ export class AlmacenAdminComponent implements OnInit {
 
     //Asignamos campos que no se han podido recoger en el formulario
     this.formPedidos.value.cod_pedido = this.sCodPedido
-
     this._pedidoService.createPedido(this.formPedidos.value).subscribe({
       next : (data: any) => {
         this._msgService.add({ severity: 'success', detail: 'Creado !', summary: 'El pedido ha sido creado con éxito'})
         this.showAddpedido = false
-        
-
+        // Reseteamos el formulario de valores
+        this.formPedidos.reset()
+        // Resetamos el cod_pedido y el grid de productos seleccionados.
+        this.sCodPedido = '';
+        this.productosOrder = [];
+        // Refrescamos el grid de pedidos.
+        this.refreshPedidos = true;
       },
       error: (err:any) => {
         console.log(err)
         this._msgService.add({ severity: 'error', detail: err.error, summary: 'Error al crear el pedido'})
-
-
       }
     })
     
