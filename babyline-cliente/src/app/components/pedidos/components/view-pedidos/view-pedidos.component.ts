@@ -99,9 +99,20 @@ export class ViewPedidosComponent implements OnInit {
     }
   }
 
-  // Función que asoaciamos cuando empezamos un pedido
+  // Función que asoaciamos cuando empezamos un pedido y actualizacion del estado del pedido.
   empezarPedido(pedido : any){
-    this.pedidoEmpezado = true;
+
+    let data = { estado: 'En curso'} 
+    this._pedidoService.updatePedido(pedido.id, data).subscribe({
+      next : (data:any) => {
+        this.pedidoEmpezado = true;
+        this._msgService.add({ severity: 'info', summary: 'Pedido en curso', detail: `Has comenzado el pedido ${pedido.numero_pedido} ` })
+      },
+      error : (err:any) => {
+        this._msgService.add({ severity: 'error', summary: 'Error al comenzar el pedido', detail: `Error interno sobre el pedido. ${pedido.numero_pedido}. Contacte con el administrador. ` })
+        return
+      }
+    })
     this.getDetallePedidos(pedido)
     
   }

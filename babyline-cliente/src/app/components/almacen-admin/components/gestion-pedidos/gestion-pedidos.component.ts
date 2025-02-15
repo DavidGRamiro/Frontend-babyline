@@ -17,7 +17,12 @@ import { PedidosService } from '../../../pedidos/services/pedidos.service';
 export class GestionPedidosComponent implements OnInit {
   
   @Output() evenRes : EventEmitter<any> = new EventEmitter<any>();
-  @Input() refresh : boolean = false;
+  @Input() set refresh(_refrescar:boolean){
+    this.refrescar  = _refrescar
+    if(this.refrescar){
+      this.getPedidosMissing()
+    }
+  };
 
   private _pedidoService = inject(PedidosService)
 
@@ -27,6 +32,7 @@ export class GestionPedidosComponent implements OnInit {
   public missingMIR : number = 0;
   public missingCAR : number = 0;
   public missingBAB : number = 0;
+  public refrescar : boolean = false;
 
   public tiendas : any[] = [
     {name: 'Miravia', code: '1'},
@@ -50,7 +56,7 @@ export class GestionPedidosComponent implements OnInit {
   }
 
 
-  getPedidosMissing() : number {
+  getPedidosMissing(){
     this._pedidoService.getPedidos().subscribe({
       next: (data: any) => {
         let pedidos = data
@@ -82,8 +88,6 @@ export class GestionPedidosComponent implements OnInit {
         
       }
     })
-
-    return 7
   }
 
 }

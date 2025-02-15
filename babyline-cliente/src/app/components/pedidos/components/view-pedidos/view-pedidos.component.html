@@ -4,7 +4,7 @@
     <p-table [value]="pedidos" [tableStyle]="{ 'min-width': '60rem' }">
       <ng-template pTemplate="caption">
         <div class="flex align-items-center justify-content-between">
-          Pedidos
+          Pedidos asignados a usuario
           <p-button icon="pi pi-refresh" (onClick)="getPedidos()" />
         </div>
       </ng-template>
@@ -35,7 +35,7 @@
               [severity]="getPrioridad(pedido.prioridad)"
             />
           </td>
-          @if(pedido.estado == 'Sin empezar'){
+          @if(pedido.estado == 'Sin empezar' || pedido.estado === 'En curso'){
             <td>
               <button 
                   type="button" 
@@ -61,3 +61,5 @@
 }@else {
   <app-pedido-order [order]="productosPedido" (eventRes)="getEmitterOrder($event)"></app-pedido-order>
 }
+
+<p-toast></p-toast>
