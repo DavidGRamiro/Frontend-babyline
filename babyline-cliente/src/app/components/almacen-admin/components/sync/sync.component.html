@@ -1,1 +1,27 @@
-<p>sync works!</p>,
+
+
+
+<p-messages 
+    [(value)]="messages_info" 
+    [enableService]="false" 
+    [closable]="false" />
+
+<p-messages 
+[(value)]="messages_info_2" 
+[enableService]="false" 
+[closable]="false" />
+
+
+<div class="container">
+
+  <p-dropdown 
+    [options]="BBDD" 
+    [(ngModel)]="BBDDSeleccionada" 
+    optionLabel="name" 
+    appendTo="body"
+    placeholder="Selecciona una base de datos a actualizar" />
+
+  <p-button class="m-2" icon="pi pi-sync" severity="info" rounded="true" (onClick)="syncBBDD()" [loading]="loading"/>
+
+</div>
+
