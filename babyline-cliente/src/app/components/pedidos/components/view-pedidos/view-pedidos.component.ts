@@ -24,6 +24,7 @@ export class ViewPedidosComponent implements OnInit {
   public pedidos : any[] = [];
   public productosPedido : [] = [];
   public pedidoEmpezado : boolean = false;
+  public num_pedido : string = ''
 
   ngOnInit(): void {
     this.getPedidos()
@@ -103,6 +104,7 @@ export class ViewPedidosComponent implements OnInit {
   empezarPedido(pedido : any){
 
     let data = { estado: 'En curso'} 
+    this.num_pedido = pedido.numero_pedido;
     this._pedidoService.updatePedido(pedido.id, data).subscribe({
       next : (data:any) => {
         this.pedidoEmpezado = true;

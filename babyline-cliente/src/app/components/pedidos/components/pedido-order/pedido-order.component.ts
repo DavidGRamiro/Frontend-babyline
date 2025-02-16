@@ -6,6 +6,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { PedidosService } from '../../services/pedidos.service';
 import { FormsModule } from '@angular/forms';
 import { producerIncrementEpoch } from '@angular/core/primitives/signals';
+import { ErrorLogService } from '../../../almacen-admin/services/errorlog.service';
 
 interface Producto {
   cantidad : number,
@@ -30,9 +31,11 @@ interface Producto {
 export class PedidoOrderComponent implements OnInit {
 
   @Output() eventRes : EventEmitter<any> = new EventEmitter<any>
+  @Input() num_pedido : string = ''
   @Input() set order (data : any[]){
     if(data.length > 0){
       this.productos = data
+      console.log(data)
     }
   }
 
@@ -40,6 +43,7 @@ export class PedidoOrderComponent implements OnInit {
   private _confirm = inject(ConfirmationService)
   private _pedidoService = inject(PedidosService)
   private _productoService = inject(ProductosService)
+  private _errorLogService = inject(ErrorLogService)
 
   public productos : Producto[] = [];
   public showCheck : boolean = false;
@@ -62,10 +66,27 @@ export class PedidoOrderComponent implements OnInit {
 
   // Se informa de un error de un producto faltante en el pedido
   errorOrder(item:any){
+    console.log(item)
     if (!this.productoError.includes(item.id_fk_producto)) {
       this.productoError.push(item.id_fk_producto);
     }
     this._msgService.add({ severity: 'info', life: 3500, summary: 'Incidencia enviada', detail: 'Se ha informado al administrador sobre el estado del producto.' })
+
+    // Se add los el error al componente de errores.
+    let body = {
+      descripcion: `Pedido: ${ this.num_pedido}. Producto faltante: ${item.producto.denominacion_producto}. Faltantes: ${item.cantidad - item.producto.stock}`,
+    }
+
+    this._errorLogService.createError(body).subscribe({
+      next: (data: any) => {
+        console.log('Data error log enviada')
+      },
+      error : (err: any)=> {
+        console.log(err)
+      }
+    })
+
+
 
   }
 

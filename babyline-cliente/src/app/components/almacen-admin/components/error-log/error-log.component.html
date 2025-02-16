@@ -1,1 +1,23 @@
-<p>error-log works!</p>,
+
+<p-messages 
+    [(value)]="messages" 
+    [enableService]="false" 
+    [closable]="false" />
+
+<p-table [value]="errorLogs" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+        <tr>
+            <th>Descripcion</th>
+            <th>Fecha incidencia</th>
+            <th>Usuario</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-error>
+        <tr>
+            <td>{{ error.descripcion }}</td>
+            <td>{{ error.fc_incidencia | date:'dd/MM/yyyy' }}</td>
+            <td>{{ error.usuario }}</td>
+        </tr>
+    </ng-template>
+</p-table>
+

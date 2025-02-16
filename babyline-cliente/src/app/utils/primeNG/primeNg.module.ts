@@ -24,6 +24,7 @@ import { BadgeModule } from 'primeng/badge';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TooltipModule } from 'primeng/tooltip';
 import { DataViewModule } from 'primeng/dataview';
+import { MessagesModule } from 'primeng/messages';
 @NgModule({
   declarations: [],
   imports: [
@@ -54,6 +55,7 @@ import { DataViewModule } from 'primeng/dataview';
     DataViewModule,
     ConfirmDialogModule,
     ConfirmPopupModule,
+    MessagesModule
     
   ],
   exports: [
@@ -83,6 +85,7 @@ import { DataViewModule } from 'primeng/dataview';
     DataViewModule,
     ConfirmDialogModule,
     ConfirmPopupModule,
+    MessagesModule
 
   ]
 })

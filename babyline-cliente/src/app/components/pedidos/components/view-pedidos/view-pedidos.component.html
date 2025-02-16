@@ -59,7 +59,7 @@
     </p-table>
   </div>
 }@else {
-  <app-pedido-order [order]="productosPedido" (eventRes)="getEmitterOrder($event)"></app-pedido-order>
+  <app-pedido-order [order]="productosPedido" [num_pedido]="num_pedido" (eventRes)="getEmitterOrder($event)"></app-pedido-order>
 }
 
 <p-toast></p-toast>
