@@ -41,7 +41,7 @@ export class SyncComponent implements OnInit {
   }
 
   syncBBDD(){
-    this.loading = true
+    this.loading = false
     console.log('Sincronizando')
     this._syncService.sincronizar().subscribe({
       next :( data:any) => {
