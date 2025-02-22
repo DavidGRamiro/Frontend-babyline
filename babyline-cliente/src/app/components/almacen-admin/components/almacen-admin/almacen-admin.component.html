@@ -128,7 +128,7 @@
   }@else if(showLogError){
   <app-error-log></app-error-log>
   }@else if(showSync){
-  <app-sync></app-sync>
+  <app-sync (evenRes)="getEmitterSync($event)"></app-sync>
   }@else{
   <h1>Nada que mostrar</h1>
   }

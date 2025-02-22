@@ -244,8 +244,11 @@ export class AlmacenAdminComponent implements OnInit {
         this._msgService.add({ severity: 'error', detail: err.error, summary: 'Error al crear el pedido'})
       }
     })
-    
+  }
 
+  // Cierre del modal de sincronizacion de BBDD
+  getEmitterSync(event:boolean){
+    this.bDisplay = event
   }
 }
 

@@ -16,7 +16,7 @@
 
   <p-dropdown 
     [options]="BBDD" 
-    [(ngModel)]="BBDDSeleccionada" 
+    [(ngModel)]="BBDD[0]" 
     optionLabel="name" 
     appendTo="body"
     placeholder="Selecciona una base de datos a actualizar" />
@@ -24,4 +24,5 @@
   <p-button class="m-2" icon="pi pi-sync" severity="info" rounded="true" (onClick)="syncBBDD()" [loading]="loading"/>
 
 </div>
+
 
