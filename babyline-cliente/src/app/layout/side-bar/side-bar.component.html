@@ -1,6 +1,5 @@
 <div class="card flex justify-content-center">
-  <p-sidebar [(visible)]="showSideBar" (visibleChange)="visibleChange($event)">
-      <h3>Gestión</h3>
+  <p-sidebar styleClass="w-15rem" [(visible)]="showSideBar" (visibleChange)="visibleChange($event)">
       <p-menu [model]="items" />
   </p-sidebar>
 </div>

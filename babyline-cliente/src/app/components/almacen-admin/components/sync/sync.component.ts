@@ -19,7 +19,7 @@ import { debounce, debounceTime, switchMap } from 'rxjs';
 export class SyncComponent implements OnInit {
 
   @Output() evenRes : EventEmitter<boolean> = new EventEmitter<boolean>()
-
+  
   //Servicios
   private _syncService  = inject(SyncService)
   private _messageService = inject(MessageService)
