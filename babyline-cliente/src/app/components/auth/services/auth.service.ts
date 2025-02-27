@@ -26,4 +26,8 @@ export class AuthService {
     return false;
   }
 
+  logout( data = null){
+    return this._http.post(`${this.url}logout/`, data);
+  }
+
 }

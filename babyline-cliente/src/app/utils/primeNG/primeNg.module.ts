@@ -25,6 +25,8 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TooltipModule } from 'primeng/tooltip';
 import { DataViewModule } from 'primeng/dataview';
 import { MessagesModule } from 'primeng/messages';
+import { SplitButtonModule } from 'primeng/splitbutton';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -55,7 +57,8 @@ import { MessagesModule } from 'primeng/messages';
     DataViewModule,
     ConfirmDialogModule,
     ConfirmPopupModule,
-    MessagesModule
+    MessagesModule,
+    SplitButtonModule,
     
   ],
   exports: [
@@ -85,7 +88,8 @@ import { MessagesModule } from 'primeng/messages';
     DataViewModule,
     ConfirmDialogModule,
     ConfirmPopupModule,
-    MessagesModule
+    MessagesModule,
+    SplitButtonModule
 
   ]
 })

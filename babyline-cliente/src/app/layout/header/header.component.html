@@ -5,6 +5,10 @@
 
   <button
     #menubutton
+    [pTooltip]="notIniciado ? 'Inicia la jornada laboral para mostrar el menú de gestión' : ''" 
+    showDelay="1000" 
+    hideDelay="300" 
+    [disabled]="notIniciado"
     class="p-link layout-menu-button layout-topbar-button"
     (click)="getSideBar($event)"
   >
@@ -19,17 +23,14 @@
   </button>
 
   <div #topbarmenu class="layout-topbar-menu">
-    <button class="p-link layout-topbar-button">
-      <i class="pi pi-calendar"></i>
-      <span>Calendar</span>
-    </button>
-    <button class="p-link layout-topbar-button">
-      <i class="pi pi-user"></i>
+
+    <button class="p-link layout-topbar-button" (click)="fichar($event)"  [pTooltip]="notIniciado ? 'Inicio de jornada' : 'Fin de jornada'" 
+    showDelay="1000" >
+      <i class="pi pi-clock"></i>
       <span>Profile</span>
-    </button>
-    <button class="p-link layout-topbar-button">
-      <i class="pi pi-cog"></i>
-      <span>Settings</span>
     </button>
   </div>
 </div>
+
+<p-toast />
+<p-confirmDialog />
