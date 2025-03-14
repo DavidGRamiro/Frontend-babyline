@@ -33,7 +33,7 @@ export class SideBarComponent implements OnInit {
   ngOnInit() {
     let user = JSON.parse(localStorage.getItem('user')!)
     if(user !== null){
-      this.isAdmin = user.id_fk_rol__denominacion === 'Administrador' ? true : false
+      this.isAdmin = user.id_fk_rol__denominacion === 'Administrador' || 'Super usuario' ? true : false
     }
 
       this.items = [
