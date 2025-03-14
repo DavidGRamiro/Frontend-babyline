@@ -26,7 +26,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DataViewModule } from 'primeng/dataview';
 import { MessagesModule } from 'primeng/messages';
 import { SplitButtonModule } from 'primeng/splitbutton';
-
+import { ChartModule } from 'primeng/chart';
 @NgModule({
   declarations: [],
   imports: [
@@ -59,6 +59,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
     ConfirmPopupModule,
     MessagesModule,
     SplitButtonModule,
+    ChartModule
     
   ],
   exports: [
@@ -89,7 +90,8 @@ import { SplitButtonModule } from 'primeng/splitbutton';
     ConfirmDialogModule,
     ConfirmPopupModule,
     MessagesModule,
-    SplitButtonModule
+    SplitButtonModule,
+    ChartModule
 
   ]
 })

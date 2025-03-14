@@ -1,13 +1,20 @@
+
 <div>
   <app-header (sideEvent)="getSideEvent($event)"></app-header>
 
   <div class="layout-sidebar">
-      <app-side-bar [showSideBar]="showSideBar" (onCloseEmit)="getEventFromSideBar($event)"></app-side-bar>
+      <app-side-bar [showSideBar]="showSideBar" (onCloseEmit)="getEventFromSideBar($event)">
+        
+      </app-side-bar>
       <main class="layout-main-container">
-      
-      <div>
+        <div>
           <router-outlet></router-outlet>
       </div>
-    </main>
+      @if (isHomePage) {
+        <app-cards></app-cards>
+      }
+
+
+    </main>  
   </div>
 </div>

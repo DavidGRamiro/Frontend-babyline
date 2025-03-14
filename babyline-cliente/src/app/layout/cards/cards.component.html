@@ -1,0 +1,29 @@
+
+<p-messages 
+    [(value)]="messages" 
+    [enableService]="false" 
+    [closable]="false" />
+
+<div class="card">
+  <div class="grid">
+    <div class="col-6">
+        <p-chart type="line" [data]="data" [options]="options" />
+      </div>
+      <div class="col-6">
+        <p-chart type="bar" [data]="data" [options]="options" />
+      </div>
+
+    <div class="col-3"></div>
+    <div class="col-6">
+      <p-chart type="polarArea" [data]="data" [options]="options" />
+    </div>
+    <div class="col-3"></div>
+
+  </div>
+
+
+
+
+
+
+</div>

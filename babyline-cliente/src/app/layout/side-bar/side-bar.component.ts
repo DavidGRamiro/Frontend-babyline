@@ -26,10 +26,16 @@ export class SideBarComponent implements OnInit {
   private _messageService = inject(MessageService)
 
   items: MenuItem[] | undefined;
+  public isAdmin : boolean = false
 
   constructor( private _router : Router){}
+    
+  ngOnInit() {
+    let user = JSON.parse(localStorage.getItem('user')!)
+    if(user !== null){
+      this.isAdmin = user.id_fk_rol__denominacion === 'Administrador' ? true : false
+    }
 
-    ngOnInit() {
       this.items = [
         {
           label: 'Almacén',
@@ -43,6 +49,7 @@ export class SideBarComponent implements OnInit {
             {
               label: 'Alta en almacén',
               icon: PrimeIcons.PLUS,
+              disabled: !this.isAdmin,
               routerLink: ['/home/almacen'],
               command: (event) => this.onMenuItemClick(event)
             },
